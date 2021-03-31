@@ -1,0 +1,28 @@
+.app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  background-color: #fff;
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+  color: #1A1B22;
+}
+
+.app__container {
+  max-width: 1232px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+  .app__container {
+    max-width: 688px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .app__container {
+    max-width: 288px;
+  }
+}

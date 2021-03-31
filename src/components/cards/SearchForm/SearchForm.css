@@ -1,0 +1,23 @@
+.searchForm {
+  background: linear-gradient(0deg,rgba(0,0,0,.5) 0%, rgba(0,0,0,.5) 100%), url('../../../images/hand-with-cellphone.jpg') no-repeat center;
+  background-size: cover;
+  background-position: center center;
+  background: color #000;;
+  height: 400px;
+}
+
+.searchForm__title {
+
+}
+
+.searchForm__subtitle {
+
+}
+
+.searchForm__input {
+
+}
+
+.searchForm__input-button {
+  
+}
