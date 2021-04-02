@@ -1,10 +1,17 @@
-@import url('../../../vendor/normalize.css');
-@import url('../../../vendor/fonts/fonts.css');
-
 .header {
-  background-color: #000;
+  z-index: 2;
+  height: 80px;
+  border-bottom: 1px solid #D1D2D6;
+  width: 100vw;
+}
+
+.header__contents {
+  max-width: 1232px;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
 }
 
 .header__title {
@@ -15,14 +22,51 @@
   font-weight: 700;
 }
 
-.header__nav {
-  
+.header__nav-container {
+  display: flex;
+  flex-direction: row;
+  height: 80px;
+  margin: 0;
+  align-items: center;
 }
 
 .header__nav-text {
-
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 32px 0 0;
+  height: 80px;
+  vertical-align: center;
+  padding: 0 20px;
+  color: #fff;
+  text-decoration: none;
+  line-height: 24px;
+  font-size: 18px;
+  list-style: none;
+  border-bottom: 3px solid #fff;
 }
 
 .header__nav-link {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  text-decoration: none;
+  line-height: 22px;
+  font-size: 18px;
+  font-weight: 500;
+  list-style: none;
+  cursor: pointer;
+}
 
+.header__nav-button {
+  width: 176px;
+  height: 48px;
+  border: 1px solid #fff;
+  border-radius: 100px;
+  background: none;
+  color: #fff;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
 }
