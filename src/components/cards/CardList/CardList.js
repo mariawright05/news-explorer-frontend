@@ -7,13 +7,11 @@ const CardList = () => {
     <div className="cardList">
       <div className="cardList__section-wrapper">
         <h2 className="cardList__title">Search results</h2>
-        <div className="cardList__card-wrapper">
+        <ul className="cardList__card-wrapper">
           <Card />
           <Card />
           <Card />
-          <Card />
-          <Card />
-        </div>
+        </ul>
       </div>
     </div>
   );
