@@ -1,24 +1,25 @@
-.Card {
+.card {
+  border: 1px solid #000;
+  background-color: white;
+}
+
+.card__image {
 
 }
 
-.Card__image {
+.card__pubDate {
 
 }
 
-.Card__pubDate {
+.card__title {
 
 }
 
-.Card__title {
+.card__description {
 
 }
 
-.Card__description {
-
-}
-
-.Card__source {
+.card__source {
 
 }
 

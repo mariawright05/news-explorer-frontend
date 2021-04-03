@@ -3,7 +3,7 @@ import './Main.css';
 import Search from '../../cards/Search/Search';
 import Preloader from '../../pageLayout/Preloader/Preloader';
 import CardList from '../../cards/CardList/CardList';
-import UserAbout from '../../pageLayout/UserAbout/UserAbout';
+import Author from '../../pageLayout/Author/Author';
 
 const Main = () => {
   return (
@@ -11,7 +11,7 @@ const Main = () => {
       <Search />
       <Preloader />
       <CardList />
-      <UserAbout />
+      <Author />
     </div>
   );
 };
