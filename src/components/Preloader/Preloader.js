@@ -3,8 +3,9 @@ import './Preloader.css';
 
 const Preloader = () => {
   return (
-    <div>
-      <h1>Preloader</h1>
+    <div className="preloader">
+      <i className="preloader__circle" />
+      <p className="preloader__text">Searching for news...</p>
     </div>
   );
 };

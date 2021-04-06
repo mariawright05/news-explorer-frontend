@@ -69,3 +69,8 @@
   line-height: 24px;
   font-weight: 500;
 }
+
+.header__color_alt {
+  color: #1a1b22;
+  border-color: #1a1b22;
+}

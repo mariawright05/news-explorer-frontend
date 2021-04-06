@@ -1,6 +1,6 @@
 import React from 'react';
 import './Card.css';
-import PlaceholderImg from '../../../images/pinnacles.jpeg';
+import PlaceholderImg from '../../images/pinnacles.jpeg';
 
 const Card = () => {
   return (

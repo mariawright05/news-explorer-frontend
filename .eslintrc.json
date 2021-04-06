@@ -20,7 +20,9 @@
     "rules": {
       "no-underscore-dangle": ["off", { "allow": ["id"] }],
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-      "arrow-body-style": ["error", "always"]
+      "arrow-body-style": ["error", "always"],
+      "react/prop-types": "off",
+      "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
     },
     "parser": "babel-eslint"
 }
