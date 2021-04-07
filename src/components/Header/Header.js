@@ -4,7 +4,6 @@ import './Header.css';
 
 const Header = (props) => {
   const { isAlt, isAuth } = props;
-  console.log(isAuth);
 
   const authLinks = (
     // need button icon

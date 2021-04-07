@@ -17,7 +17,10 @@ const CardList = (props) => {
           <Card />
           <Card />
         </ul>
-        <input type="submit" value="Show more" className="cardList__button" />
+        {
+          !isAlt
+          && <input type="submit" value="Show more" className="cardList__button" />
+        }
       </div>
     </div>
   );

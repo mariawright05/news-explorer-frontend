@@ -1,0 +1,40 @@
+.userInfo {
+  max-width: 1232px;
+  padding: 40px 0 56px 0;
+  margin: 0 auto;
+}
+
+.userInfo__container {
+  max-width: 530px;
+}
+
+.userInfo__title {
+  font-family: 'Roboto', Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1a1b2280;
+  margin: 0 0 28px 0;
+}
+
+.userInfo__stats {
+  font-family: 'Roboto Slab', Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 46px;
+  color: #1a1b22;
+  margin: 0 0 30px 0;
+}
+
+.userInfo__keywords {
+  font-family: 'Roboto', Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1a1b22;
+  margin: 0;
+}
+
+.userInfo__keywords_strong {
+  font-weight: 700;
+}
