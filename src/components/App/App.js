@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import Footer from '../Footer/Footer';
+import NewsState from '../../context/news/NewsState';
 import './App.css';
 
 function App() {
@@ -14,19 +15,21 @@ function App() {
 
   return (
     <div className="app">
-      <Router>
-        <>
-          <Switch>
-            <Route exact path="/">
-              <Main isAuth={isAuth} isAlt={isAlt} />
-            </Route>
-            <Route exact path="/saved-news">
-              <SavedNews isAuth={isAuth} isAlt={isAlt} />
-            </Route>
-          </Switch>
-          <Footer />
-        </>
-      </Router>
+      <NewsState>
+        <Router>
+          <>
+            <Switch>
+              <Route exact path="/">
+                <Main isAuth={isAuth} isAlt={isAlt} />
+              </Route>
+              <Route exact path="/saved-news">
+                <SavedNews isAuth={isAuth} isAlt={isAlt} />
+              </Route>
+            </Switch>
+            <Footer />
+          </>
+        </Router>
+      </NewsState>
     </div>
   );
 }

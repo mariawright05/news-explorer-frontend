@@ -22,6 +22,7 @@
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
       "arrow-body-style": ["error", "always"],
       "react/prop-types": "off",
+      "react/destructuring-assignment": [0],
       "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
     },
     "parser": "babel-eslint"
