@@ -1,8 +1,10 @@
+import { slice } from 'lodash';
 import {
   SEARCH_NEWS,
   SET_LOADING,
   SET_SAVED,
 } from '../types';
+import { LIMIT } from '../../utils/configData.json';
 
 export default (state, action) => {
   switch (action.type) {
@@ -10,6 +12,7 @@ export default (state, action) => {
       return {
         ...state,
         cards: action.payload,
+        visibleList: slice(action.payload, 0, LIMIT),
         loading: false,
       };
     case SET_LOADING:
@@ -22,6 +25,11 @@ export default (state, action) => {
         ...state,
         isSaved: !state.isSaved,
       };
+    // case SET_LIST:
+    //   return {
+    //     ...state,
+    //     list: action.payload,
+    //   };
     default:
       return state;
   }

@@ -1,10 +1,13 @@
 import React, { useReducer } from 'react';
+// import { slice, concat } from 'lodash';
 import NewsContext from './newsContext';
 import NewsReducer from './newsReducer';
+// import { ARRAY_LENGTH, LIMIT } from '../../utils/configData.json';
 import {
   SEARCH_NEWS,
   SET_LOADING,
   SET_SAVED,
+  // SET_LIST,
 } from '../types';
 
 const NewsState = (props) => {
@@ -18,7 +21,7 @@ const NewsState = (props) => {
       description: 'Ever since I read Richard Louv\'s influential book, "Last Child in the Woods," the idea of having a special "sit spot" has stuck with me.This advice, which Louv attributes to nature educator Jon Young, is for both adults and children to find...',
       source: 'treehugger',
       keyword: 'Nature',
-      isSaved: false,
+      isSaved: true,
     },
     {
       id: 2,
@@ -64,12 +67,35 @@ const NewsState = (props) => {
       keyword: 'Photography',
       isSaved: false,
     },
+    {
+      id: 6,
+      url: 'https://www.treehugger.com/polaris-north-star-facts-how-big-far-4859425#:~:text=Polaris%20has%20an%20older%20friend.&text=According%20to%20the%20new%20study,a%20new%20lease%20on%20life.',
+      image: 'https://www.treehugger.com/thmb/29MSwyudwok2_gh6AZDAwWH17CE=/768x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2020__03__polaris-north-star-facts-b2a823cf25a44ef89260cd09f5c5c845.jpg',
+      pubDate: 'March 16, 2020',
+      title: 'Scientists Don\'t Know Why Polaris Is So Weird',
+      description: 'Humans have long relied on the starry sky to push into new frontiers, sail to the very edge of the world and find their way back home again. Even animals look to the stars to guide them.',
+      source: 'treehugger',
+      keyword: 'Photography',
+      isSaved: false,
+    },
+    {
+      id: 7,
+      url: 'https://www.treehugger.com/polaris-north-star-facts-how-big-far-4859425#:~:text=Polaris%20has%20an%20older%20friend.&text=According%20to%20the%20new%20study,a%20new%20lease%20on%20life.',
+      image: 'https://www.treehugger.com/thmb/29MSwyudwok2_gh6AZDAwWH17CE=/768x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2020__03__polaris-north-star-facts-b2a823cf25a44ef89260cd09f5c5c845.jpg',
+      pubDate: 'March 16, 2020',
+      title: 'Scientists Don\'t Know Why Polaris Is So Weird',
+      description: 'Humans have long relied on the starry sky to push into new frontiers, sail to the very edge of the world and find their way back home again. Even animals look to the stars to guide them.',
+      source: 'treehugger',
+      keyword: 'Photography',
+      isSaved: true,
+    },
   ];
 
   const initialState = {
     cards: [],
     card: {},
     loading: false,
+    visibleList: [],
   };
 
   const [state, dispatch] = useReducer(NewsReducer, initialState);
@@ -78,6 +104,26 @@ const NewsState = (props) => {
   const setLoading = () => {
     dispatch({ type: SET_LOADING });
   };
+
+  // // Set List
+  // const setCardList = (cards) => {
+  //   const [showMore, setShowMore] = useState(true);
+  //   const [list, setList] = useState([]);
+  //   const [index, setIndex] = useState(LIMIT);
+
+  //   const newIndex = index + LIMIT;
+  //   const newShowMore = newIndex < (ARRAY_LENGTH - 1);
+  //   const newList = concat(list, slice(cards, index, newIndex));
+
+  //   setIndex(newIndex);
+  //   setList(newList);
+  //   setShowMore(newShowMore);
+
+  //   dispatch({
+  //     type: SET_LIST,
+  //     payload: newList,
+  //   });
+  // };
 
   // Set isSaved
   const setIsSaved = () => {
@@ -96,11 +142,14 @@ const NewsState = (props) => {
     }, 2000);
   };
 
+  // Load More
+
   return (
     <NewsContext.Provider
       value={{
         cards: state.cards,
         loading: state.loading,
+        visibleList: state.visibleList,
         setLoading,
         setIsSaved,
         searchNews,

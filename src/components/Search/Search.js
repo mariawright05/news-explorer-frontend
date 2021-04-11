@@ -8,7 +8,7 @@ const Search = (props) => {
 
   const [text, setText] = useState('');
 
-  const { isAlt, isAuth } = props;
+  const { isAuth } = props;
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ const Search = (props) => {
 
   return (
     <div className="search">
-      <Header isAlt={isAlt} isAuth={isAuth} />
+      <Header isAuth={isAuth} />
       <div className="search__container">
         <h2 className="search__title">What&apos;s going on in the world?</h2>
         <p className="search__subtitle">Find the latest news on any topic and save them in your personal account.</p>
