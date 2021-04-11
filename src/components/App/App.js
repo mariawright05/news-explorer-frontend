@@ -10,9 +10,6 @@ function App() {
   // changes formatting of Header
   const isAuth = true;
 
-  // changes Header and CardList components on saved-news page
-  const isAlt = false;
-
   return (
     <div className="app">
       <NewsState>
@@ -20,10 +17,10 @@ function App() {
           <>
             <Switch>
               <Route exact path="/">
-                <Main isAuth={isAuth} isAlt={isAlt} />
+                <Main isAuth={isAuth} />
               </Route>
               <Route exact path="/saved-news">
-                <SavedNews isAuth={isAuth} isAlt={isAlt} />
+                <SavedNews isAuth={isAuth} />
               </Route>
             </Switch>
             <Footer />

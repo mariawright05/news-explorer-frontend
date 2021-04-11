@@ -13,7 +13,6 @@ const Search = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     newsContext.searchNews(text);
-    setText('');
   };
 
   const onChange = (e) => {

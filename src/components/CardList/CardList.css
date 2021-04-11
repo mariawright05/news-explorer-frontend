@@ -2,6 +2,10 @@
   background-color: #f5f6f7;
 }
 
+.cardList_hidden {
+  display: none;
+}
+
 .cardList__title {
   font-family: 'Roboto Slab', Helvetica, sans-serif;
   font-size: 40px;

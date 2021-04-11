@@ -5,14 +5,15 @@ import CardList from '../CardList/CardList';
 import Author from '../Author/Author';
 
 const Main = (props) => {
-  const { isAlt, isAuth } = props;
+  const { isAuth } = props;
+  const isAlt = false;
 
   return (
-    <div>
-      <Search isAlt={isAlt} isAuth={isAuth} />
-      <CardList isAlt={isAlt} isAuth={isAuth} />
+    <>
+      <Search isAuth={isAuth} />
+      <CardList isAuth={isAuth} isAlt={isAlt} />
       <Author />
-    </div>
+    </>
   );
 };
 

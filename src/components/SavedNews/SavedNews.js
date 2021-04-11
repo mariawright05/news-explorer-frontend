@@ -5,7 +5,8 @@ import CardList from '../CardList/CardList';
 import UserInfo from '../UserInfo/UserInfo';
 
 const SavedNews = (props) => {
-  const { isAlt, isAuth } = props;
+  const { isAuth } = props;
+  const isAlt = true;
 
   return (
     <div>

@@ -4,27 +4,20 @@ import Card from '../Card/Card';
 import Preloader from '../Preloader/Preloader';
 import NewsContext from '../../context/news/newsContext';
 
-const CardList = (props) => {
+const CardList = ({ isAlt }) => {
   const newsContext = useContext(NewsContext);
 
   const { loading, cards } = newsContext;
 
-  console.log(cards);
-  console.log('loading: ', loading);
-
   if (loading) {
     return <Preloader />;
   }
-  if (!cards) {
-    return (
-      <p>Nothing found</p>
-    );
-  }
+
   return (
-    <div className="cardList">
+    <div className={cards.length === 0 ? 'cardList_hidden' : 'cardList'}>
       <div className="cardList__section-wrapper">
         {
-          !props.isAlt
+          (!isAlt && cards.length !== 0)
           && <h2 className="cardList__title">Search results</h2>
         }
         <ul className="cardList__card-wrapper">
@@ -33,7 +26,7 @@ const CardList = (props) => {
           })}
         </ul>
         {
-          !props.isAlt
+          !isAlt
           && <input type="submit" value="Show more" className="cardList__button" />
         }
       </div>
