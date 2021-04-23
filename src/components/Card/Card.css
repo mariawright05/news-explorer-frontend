@@ -82,14 +82,71 @@
   text-transform: uppercase;
 }
 
-.Card__icon {
+.card__icon_trash {
+  background-image: url('../../images/trash.svg');
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  border: none;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background-color: transparent;
+  transition: all 0.3s ease 0s;
+}
+
+.card__icon_trash:hover {
+  background-image: url('../../images/trash-hover.svg');
+}
+
+.card__icon_save {
+  background-image: url('../../images/save.svg');
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  border: none;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background-color: transparent;
+  transition: all 0.3s ease 0s;
+}
+
+.card__icon_save:hover {
+  background-image: url('../../images/save-hover.svg');
+}
+
+.card__icon_save:focus {
+  outline: none;
+}
+
+.card__icon_save_true {
+  background-image: url('../../images/save-active.svg');
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  border: none;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background-color: transparent;
+  transition: all 0.3s ease 0s;
+}
+
+.card__icon_save_true:focus {
+  outline: 0;
+}
+
+.card__icon-message {
 
 }
 
-.Card__icon-message {
-
-}
-
-.Card__keyword {
+.card__keyword {
   
 }

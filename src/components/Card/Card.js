@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import PageContext from '../../context/page/PageContext';
+import NewsContext from '../../context/news/newsContext';
 import './Card.css';
 
 const Card = ({ card }) => {
@@ -10,22 +11,40 @@ const Card = ({ card }) => {
     title,
     description,
     source,
+    isSaved,
+    // keyword,
   } = card;
 
   const page = useContext(PageContext);
+  const newsContext = useContext(NewsContext);
 
-  const deleteSavedCard = () => {
-    console.log('delete');
+  const { deleteCard, setIsSaved } = newsContext;
+
+  const handleDeleteClick = () => {
+    setIsSaved(card);
+    deleteCard(card.id);
   };
 
-  const handleSave = () => {
-    console.log('save/unsave');
+  // if (page === 'saved-news') {
+  //   cardButtonType = 'card__icon_trash';
+  // } else if (isSaved) {
+  //   cardButtonType = 'card__icon_save_true';
+  // } else {
+  //   cardButtonType = 'card__icon_save';
+  // }
+
+  const cardButtonType = `${
+    // eslint-disable-next-line no-nested-ternary
+    page === 'saved-news'
+      ? 'card__icon_trash'
+      : isSaved
+        ? 'card__icon_save_true'
+        : 'card__icon_save'
+  }`;
+
+  const handleSaveClick = () => {
+    setIsSaved(card);
   };
-
-  const cardButtonType = `${page === 'saved-news' ? 'trashButton' : 'saveButton'}`;
-  const handleButtonClick = page === 'saved-news' ? deleteSavedCard() : handleSave();
-
-  console.log(cardButtonType, handleButtonClick);
 
   return (
     <li className="card">
@@ -33,10 +52,10 @@ const Card = ({ card }) => {
       <button
         type="button"
         className={cardButtonType}
-        onClick={handleButtonClick}
+        onClick={page === 'saved-news' ? handleDeleteClick : handleSaveClick}
         aria-label="card action"
       />
-      <a href={url} className="card__text-wrapper">
+      <a href={url} target="_blank" rel="noopener noreferrer" className="card__text-wrapper">
         <p className="card__pubDate">{pubDate}</p>
         <h3 className="card__title">{title}</h3>
         <p className="card__description">{description}</p>

@@ -45,7 +45,7 @@ const CardList = () => {
       {cards.length !== 0 && <h2 className="cardList__title">Search results</h2>}
       <ul className="cardList__card-wrapper">
         {list.map((card) => {
-          return <Card key={list.id} card={card} />;
+          return <Card key={card.id} card={card} />;
         })}
       </ul>
       {showMore && <button type="submit" className="cardList__button" onClick={loadMore}>Show more</button>}

@@ -1,13 +1,13 @@
+/* eslint-disable no-param-reassign */
 import React, { useReducer } from 'react';
-// import { slice, concat } from 'lodash';
 import NewsContext from './newsContext';
 import NewsReducer from './newsReducer';
-// import { ARRAY_LENGTH, LIMIT } from '../../utils/configData.json';
 import {
-  SEARCH_NEWS,
+  SEARCHED_NEWS,
   SET_LOADING,
+  DELETE_CARD,
   SET_SAVED,
-  // SET_LIST,
+  SET_NOT_SAVED,
 } from '../types';
 
 const NewsState = (props) => {
@@ -48,7 +48,7 @@ const NewsState = (props) => {
     {
       id: 4,
       url: 'https://www.nationalparkstraveler.org/2020/10/grand-teton-renews-historic-crest-trail#:~:text=%E2%80%9CThe%20linking%20together%20of%20the,visit%20that%20most%20fascinating%20region%E2%80%A6',
-      image: 'https://www.nationalparkstraveler.org/sites/default/files/styles/panopoly_image_original/public/media/grte-teton_crest_trailnps_960.jpeg?itok=lLhXZJV9',
+      image: 'https://images.unsplash.com/photo-1606284426176-69495a27add7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1867&q=80',
       pubDate: 'November, 4 2020',
       title: 'Grand Teton Renews Historic Crest Trail',
       description: '“The linking together of the Cascade and Death Canyon trails, at their heads, took place on October 1, 1933, and marked the first step in the realization of a plan whereby the hiker will be...',
@@ -105,30 +105,7 @@ const NewsState = (props) => {
     dispatch({ type: SET_LOADING });
   };
 
-  // // Set List
-  // const setCardList = (cards) => {
-  //   const [showMore, setShowMore] = useState(true);
-  //   const [list, setList] = useState([]);
-  //   const [index, setIndex] = useState(LIMIT);
-
-  //   const newIndex = index + LIMIT;
-  //   const newShowMore = newIndex < (ARRAY_LENGTH - 1);
-  //   const newList = concat(list, slice(cards, index, newIndex));
-
-  //   setIndex(newIndex);
-  //   setList(newList);
-  //   setShowMore(newShowMore);
-
-  //   dispatch({
-  //     type: SET_LIST,
-  //     payload: newList,
-  //   });
-  // };
-
-  // Set isSaved
-  const setIsSaved = () => {
-    dispatch({ type: SET_SAVED });
-  };
+  // Change saved button
 
   // Search News
   const searchNews = () => {
@@ -136,13 +113,44 @@ const NewsState = (props) => {
     setTimeout(() => {
       const res = tempCards;
       dispatch({
-        type: SEARCH_NEWS,
+        type: SEARCHED_NEWS,
         payload: res,
       });
     }, 2000);
   };
 
-  // Load More
+  // Set isSaved
+  const setIsSaved = (card) => {
+    // eslint-disable-next-line no-unused-expressions
+    card.isSaved
+      ? dispatch({
+        type: SET_NOT_SAVED,
+        payload: card.id,
+      })
+      : dispatch({
+        type: SET_SAVED,
+        payload: card.id,
+      });
+  };
+
+  // Set card button type
+  const setCardButtonType = (card, page) => {
+    if (page === 'saved-news') {
+      card.cardButtonType = 'card__icon_trash';
+    } else if (card.isSaved) {
+      card.cardButtonType = 'card__icon_save_true';
+    } else {
+      card.cardButtonType = 'card__icon_save';
+    }
+  };
+
+  // Delete Card
+  const deleteCard = (card) => {
+    dispatch({
+      type: DELETE_CARD,
+      payload: card,
+    });
+  };
 
   return (
     <NewsContext.Provider
@@ -150,9 +158,12 @@ const NewsState = (props) => {
         cards: state.cards,
         loading: state.loading,
         visibleList: state.visibleList,
+        isSaved: state.isSaved,
         setLoading,
         setIsSaved,
         searchNews,
+        deleteCard,
+        setCardButtonType,
       }}
     >
       {props.children}

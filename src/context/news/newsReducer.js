@@ -1,14 +1,17 @@
+/* eslint-disable no-param-reassign */
 import { slice } from 'lodash';
 import {
-  SEARCH_NEWS,
+  DELETE_CARD,
+  SEARCHED_NEWS,
   SET_LOADING,
   SET_SAVED,
+  SET_NOT_SAVED,
 } from '../types';
 import { LIMIT } from '../../utils/configData.json';
 
 export default (state, action) => {
   switch (action.type) {
-    case SEARCH_NEWS:
+    case SEARCHED_NEWS:
       return {
         ...state,
         cards: action.payload,
@@ -23,13 +26,32 @@ export default (state, action) => {
     case SET_SAVED:
       return {
         ...state,
-        isSaved: !state.isSaved,
+        cards: state.cards.map((card) => {
+          if (card.id === action.payload) {
+            card.isSaved = true;
+          }
+          return card;
+        }),
       };
-    // case SET_LIST:
-    //   return {
-    //     ...state,
-    //     list: action.payload,
-    //   };
+    case SET_NOT_SAVED:
+      return {
+        ...state,
+        cards: state.cards.map((card) => {
+          if (card.id === action.payload) {
+            card.isSaved = false;
+          }
+          return card;
+        }),
+      };
+    case DELETE_CARD:
+      return {
+        ...state,
+        cards: state.cards.filter(
+          (card) => {
+            return card.id !== action.payload;
+          },
+        ),
+      };
     default:
       return state;
   }
