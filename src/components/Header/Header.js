@@ -93,7 +93,7 @@ const Header = () => {
 
   useEffect(() => {
     handleNavLinks();
-  }, [isAuth]);
+  }, [isAuth, isRegisterOpen, isLoginOpen]);
 
   return (
     <div className="header">

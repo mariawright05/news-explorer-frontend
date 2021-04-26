@@ -51,7 +51,7 @@ const AuthState = (props) => {
 
     dispatch({
       type: USER_LOADED,
-      payload: res.data,
+      payload: res,
     });
   };
 
@@ -77,6 +77,7 @@ const AuthState = (props) => {
     });
 
     loadUser();
+    closeAllPopups();
   };
 
   // Logout

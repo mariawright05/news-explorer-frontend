@@ -6,7 +6,7 @@ import './Popup.css';
 const LoginPopup = () => {
   const authContext = useContext(AuthContext);
   const {
-    register,
+    login,
     // isAuthenticated,
     isLoginOpen,
     handleRegisterOpen,
@@ -21,12 +21,12 @@ const LoginPopup = () => {
   // }, [isAuthenticated, props.history])
 
   const [user, setUser] = useState({
-    name: '',
+    name: 'Elise',
     email: '',
     password: '',
   });
 
-  const { name, email, password } = user;
+  const { email, password } = user;
 
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -34,7 +34,7 @@ const LoginPopup = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    register({ name, email, password });
+    login(user);
   };
 
   const openRegister = () => {
