@@ -5,13 +5,11 @@ import CardList from '../CardList/CardList';
 import UserInfo from '../UserInfo/UserInfo';
 import PageContext from '../../context/page/PageContext';
 
-const SavedNews = (props) => {
-  const { isAuth } = props;
-
+const SavedNews = () => {
   return (
     <>
       <PageContext.Provider value="saved-news">
-        <Header isAuth={isAuth} />
+        <Header />
         <UserInfo />
         <CardList />
       </PageContext.Provider>

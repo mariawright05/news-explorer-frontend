@@ -1,6 +1,6 @@
 import React from 'react';
-import SigninPopup from './SigninPopup';
-import SignupPopup from './SignupPopup';
+import LoginPopup from './LoginPopup';
+import RegisterPopup from './RegisterPopup';
 import SuccessPopup from './SuccessPopup';
 
 const Popup = (props) => {
@@ -8,8 +8,8 @@ const Popup = (props) => {
 
   return (
     <div>
-      {popupType === 'signin' && <SigninPopup />}
-      {popupType === 'signup' && <SignupPopup />}
+      {popupType === 'signin' && <LoginPopup />}
+      {popupType === 'signup' && <RegisterPopup />}
       {popupType === 'success' && <SuccessPopup />}
     </div>
   );

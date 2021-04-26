@@ -3,30 +3,32 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import Footer from '../Footer/Footer';
+import Popup from '../Popup/LoginPopup';
 import NewsState from '../../context/news/NewsState';
+import AuthState from '../../context/auth/AuthState';
 import './App.css';
 
 function App() {
-  // changes formatting of Header
-  const isAuth = true;
-
   return (
     <div className="app">
-      <NewsState>
-        <Router>
-          <>
-            <Switch>
-              <Route exact path="/">
-                <Main isAuth={isAuth} />
-              </Route>
-              <Route exact path="/saved-news">
-                <SavedNews isAuth={isAuth} />
-              </Route>
-            </Switch>
-            <Footer />
-          </>
-        </Router>
-      </NewsState>
+      <AuthState>
+        <NewsState>
+          <Router>
+            <>
+              <Switch>
+                <Route exact path="/">
+                  <Main />
+                </Route>
+                <Route exact path="/saved-news">
+                  <SavedNews />
+                </Route>
+              </Switch>
+              <Footer />
+              <Popup />
+            </>
+          </Router>
+        </NewsState>
+      </AuthState>
     </div>
   );
 }

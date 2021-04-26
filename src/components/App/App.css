@@ -11,4 +11,5 @@
   background-color: #fff;
   font-family: 'Roboto', 'Helvetica', sans-serif;
   color: #1A1B22;
+  min-width: 320px;
 }

@@ -12,6 +12,7 @@
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
+  padding: 0 40px
 }
 
 .header__title {
@@ -81,6 +82,10 @@
   outline: 0;
 }
 
+.signin {
+  padding: 0 55px;
+}
+
 .header__icon {
   width: 24px;
   height: 24px;
@@ -90,4 +95,10 @@
 .header__color_alt {
   color: #1a1b22;
   border-color: #1a1b22;
+}
+
+@media screen and (max-width: 570px) {
+  .header__nav-container {
+    display: none;
+  }
 }

@@ -3,12 +3,10 @@ import Header from '../Header/Header';
 import NewsContext from '../../context/news/newsContext';
 import './Search.css';
 
-const Search = (props) => {
+const Search = () => {
   const newsContext = useContext(NewsContext);
 
   const [text, setText] = useState('');
-
-  const { isAuth } = props;
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +19,7 @@ const Search = (props) => {
 
   return (
     <div className="search">
-      <Header isAuth={isAuth} />
+      <Header />
       <div className="search__container">
         <h2 className="search__title">What&apos;s going on in the world?</h2>
         <p className="search__subtitle">Find the latest news on any topic and save them in your personal account.</p>

@@ -5,14 +5,12 @@ import CardList from '../CardList/CardList';
 import Author from '../Author/Author';
 import PageContext from '../../context/page/PageContext';
 
-const Main = (props) => {
-  const { isAuth } = props;
-
+const Main = () => {
   return (
     <>
       <PageContext.Provider value="home">
-        <Search isAuth={isAuth} />
-        <CardList isAuth={isAuth} />
+        <Search />
+        <CardList />
         <Author />
       </PageContext.Provider>
     </>
