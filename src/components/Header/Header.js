@@ -1,13 +1,19 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+// import Sidebar from '../Sidebar/Sidebar';
 import LoginPopup from '../Popup/LoginPopup';
 import RegisterPopup from '../Popup/RegisterPopup';
 import SuccessPopup from '../Popup/SuccessPopup';
 import PageContext from '../../context/page/PageContext';
 import AuthContext from '../../context/auth/authContext';
 import './Header.css';
-import { ReactComponent as Icon } from '../../images/logout-white.svg';
-import { ReactComponent as IconAlt } from '../../images/logout-dark.svg';
+import { ReactComponent as LogoutIcon } from '../../images/logout-white.svg';
+import { ReactComponent as LogoutIconAlt } from '../../images/logout-dark.svg';
+import { ReactComponent as CloseSidebarIcon } from '../../images/close-menu-black.svg';
+import { ReactComponent as OpenSidebarIcon } from '../../images/open-menu-white.svg';
+import { ReactComponent as OpenSidebarIconAlt } from '../../images/open-menu-black.svg';
 
 const Header = () => {
   const page = useContext(PageContext);
@@ -23,7 +29,6 @@ const Header = () => {
   } = authContext;
 
   const authLinks = (
-    // need name on button from auth
     <>
       <li className={`header__nav-link-container ${page === 'saved-news' ? 'header__color_alt' : ''}`}>
         <NavLink
@@ -52,9 +57,9 @@ const Header = () => {
         {user.name}
         {
           page === 'saved-news' ? (
-            <IconAlt className="header__icon" />
+            <LogoutIconAlt className="header__icon_logout" />
           ) : (
-            <Icon className="header__icon" />
+            <LogoutIcon className="header__icon_logout" />
           )
         }
       </button>
@@ -86,9 +91,23 @@ const Header = () => {
   );
 
   const [navLinks, setNavLinks] = useState(guestLinks);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleNavLinks = () => {
     setNavLinks(isAuth ? authLinks : guestLinks);
+  };
+
+  const handleSidebar = () => {
+    setSidebarOpen(() => { return !sidebarOpen; });
+  };
+
+  const handleSidebarIcon = () => {
+    // eslint-disable-next-line no-unused-expressions
+    sidebarOpen
+      ? <CloseSidebarIcon className="header__icon_sidebar" />
+      : page === 'saved-news'
+        ? <OpenSidebarIconAlt className="header__icon_sidebar" />
+        : <OpenSidebarIcon className="header__icon_sidebar" />;
   };
 
   useEffect(() => {
@@ -98,11 +117,31 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header__contents">
-        <h1 className={`header__title ${page === 'saved-news' ? 'header__color_alt' : ''}`}>NewsExplorer</h1>
-        <ul className="header__nav-container">
-          {navLinks}
-        </ul>
+        <h1 className={
+          `header__title ${page === 'saved-news' ? 'header__color_alt' : ''}`
+        }
+        >
+          NewsExplorer
+        </h1>
+        <div className="header__mainMenu">
+          <ul className="header__nav-container">
+            {navLinks}
+          </ul>
+        </div>
+        <div className="header__mobileMenu">
+          <button
+            type="button"
+            className="header__sidebar-button"
+            aria-label="open or close sidebar"
+            onClick={handleSidebar}
+          >
+            <OpenSidebarIcon className="header__sidebar-button" />
+          </button>
+        </div>
       </div>
+      <ul className="header__nav-container_sidebar">
+        {navLinks}
+      </ul>
     </div>
   );
 };
