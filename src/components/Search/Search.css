@@ -95,6 +95,7 @@
 
   .search__input-wrapper{
     max-width: 448px;
+    z-index: 0;
   }
 }
 

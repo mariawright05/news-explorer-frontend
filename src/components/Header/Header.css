@@ -98,6 +98,10 @@
   border-color: #1a1b22;
 }
 
+.header__sidebar {
+  visibility: hidden;
+}
+
 .header__sidebar-button {
   display: none;
 }
