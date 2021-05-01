@@ -11,9 +11,9 @@ import AuthContext from '../../context/auth/authContext';
 import './Header.css';
 import { ReactComponent as LogoutIcon } from '../../images/logout-white.svg';
 import { ReactComponent as LogoutIconAlt } from '../../images/logout-dark.svg';
-import { ReactComponent as CloseSidebarIcon } from '../../images/close-menu-black.svg';
-import { ReactComponent as OpenSidebarIcon } from '../../images/open-menu-white.svg';
-import { ReactComponent as OpenSidebarIconAlt } from '../../images/open-menu-black.svg';
+// import { ReactComponent as CloseSidebarIcon } from '../../images/close-menu-black.svg';
+// import { ReactComponent as OpenSidebarIcon } from '../../images/open-menu-white.svg';
+// import { ReactComponent as OpenSidebarIconAlt } from '../../images/open-menu-black.svg';
 
 const Header = () => {
   const page = useContext(PageContext);
@@ -27,6 +27,12 @@ const Header = () => {
     isAuth,
     logout,
   } = authContext;
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const handleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   const authLinks = (
     <>
@@ -91,28 +97,14 @@ const Header = () => {
   );
 
   const [navLinks, setNavLinks] = useState(guestLinks);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleNavLinks = () => {
     setNavLinks(isAuth ? authLinks : guestLinks);
   };
 
-  const handleSidebar = () => {
-    setSidebarOpen(() => { return !sidebarOpen; });
-  };
-
-  const handleSidebarIcon = () => {
-    // eslint-disable-next-line no-unused-expressions
-    sidebarOpen
-      ? <CloseSidebarIcon className="header__icon_sidebar" />
-      : page === 'saved-news'
-        ? <OpenSidebarIconAlt className="header__icon_sidebar" />
-        : <OpenSidebarIcon className="header__icon_sidebar" />;
-  };
-
   useEffect(() => {
     handleNavLinks();
-  }, [isAuth, isRegisterOpen, isLoginOpen]);
+  }, [isAuth, isRegisterOpen, isLoginOpen, isSidebarOpen]);
 
   return (
     <div className="header">
@@ -123,25 +115,28 @@ const Header = () => {
         >
           NewsExplorer
         </h1>
-        <div className="header__mainMenu">
-          <ul className="header__nav-container">
-            {navLinks}
-          </ul>
-        </div>
-        <div className="header__mobileMenu">
-          <button
-            type="button"
-            className="header__sidebar-button"
-            aria-label="open or close sidebar"
-            onClick={handleSidebar}
-          >
-            <OpenSidebarIcon className="header__sidebar-button" />
-          </button>
-        </div>
+        <ul className="header__nav-container">
+          {navLinks}
+        </ul>
+        <button
+          type="button"
+          className={`header__sidebar-button 
+            ${isSidebarOpen
+            ? ((page === 'saved-news')
+              ? 'header__sidebar_closed-alt'
+              : 'header__sidebar_closed')
+            : (page === 'saved-news')
+              ? 'header__sidebar_open-alt'
+              : 'header__sidebar_open'}`}
+          aria-label="open or close sidebar"
+          onClick={handleSidebar}
+        />
       </div>
-      <ul className="header__nav-container_sidebar">
-        {navLinks}
-      </ul>
+      <div className={`header__sidebar ${isSidebarOpen ? 'header__sidebar_opened' : ''}`}>
+        <ul className="header__nav-container_sidebar">
+          {navLinks}
+        </ul>
+      </div>
     </div>
   );
 };
