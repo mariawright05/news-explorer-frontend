@@ -1,4 +1,4 @@
-.popup {
+.registerPopup {
   position: fixed;
   display: flex;
   top: 0;
@@ -17,7 +17,7 @@
   z-index: 10;
 }
 
-.popup__container {
+.registerPopup__container {
   background-color: #fff;
   padding: 36px;
   border-radius: 16px;
@@ -32,14 +32,14 @@
   box-sizing: border-box;
 }
 
-.popup__form {
+.registerPopup__form {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.popup__heading {
+.registerPopup__heading {
   color: #1a1b22;
   font-size: 24px;
   line-height: 29px;
@@ -48,13 +48,13 @@
   text-align: left;
 }
 
-.popup__form-group {
+.registerPopup__form-group {
   padding: 22px 0 10px;
   margin: 0;
   border: none;
 }
 
-.popup__form-label {
+.registerPopup__form-label {
   position: relative;
   color: #2f71e5;
   font-family: 'Inter', Helvetica, sans-serif;
@@ -62,7 +62,7 @@
   line-height: 14px;
 }
 
-.popup__form-field {
+.registerPopup__form-field {
   font-size: 14px;
   line-height: 17px;
   border: none;
@@ -73,11 +73,11 @@
   margin-bottom: 30px;
 }
 
-.popup__form-field:focus {
+.registerPopup__form-field:focus {
   outline: 0;
 }
 
-.popup__button {
+.registerPopup__button {
   width: 100%;
   background-color: #2F71E5;
   height: 64px;
@@ -91,28 +91,28 @@
   border-radius: 100px;
 }
 
-.popup__button:hover {
+.registerPopup__button:hover {
   background-color: #347eff;
 }
 
-.popup__button:active {
+.registerPopup__button:active {
   background-color: #2A65CC;
 }
 
-.popup__button:disabled {
+.registerPopup__button:disabled {
   background-color: #E6E8EB;
   border: 1px solid rgb(0, 0, 0, 0.2);
   color: #B6BCBF;
 }
 
-.popup__message {
+.registerPopup__message {
   font-size: 14px;
   color: #000;
   line-height: 17px;
   margin-top: 15px;
 }
 
-.popup__message_link {
+.registerPopup__message_link {
   color: #2F71E5;
   font-size: 14px;
   line-height: 17px;
@@ -123,14 +123,14 @@
   border: none;
 }
 
-.popup_opened {
+.registerPopup_opened {
   visibility: visible;
   opacity: 1;
   transition-delay: 0s;
   pointer-events: all;
 }
 
-.popup__close-button {
+.registerPopup__close-button {
   background-image: url('../../images/close-icon.svg');
   background-repeat: no-repeat;
   background-position: center;
@@ -145,7 +145,7 @@
   cursor: pointer;
 }
 
-.popup__close-button:hover {
+.registerPopup__close-button:hover {
   opacity: 0.6
 }
 
@@ -154,7 +154,7 @@
 }
 
 @media screen and (max-width: 570px) {
-  .popup__container {
+  .registerPopup__container {
     width: 100%;
     padding: 16px;
     height: 100vh;
@@ -162,7 +162,7 @@
     top: 56px;
   }
 
-  .popup__close-button {
+  .registerPopup__close-button {
     top: -46px;
     right: 8px;
     background-size: 24px 24px;

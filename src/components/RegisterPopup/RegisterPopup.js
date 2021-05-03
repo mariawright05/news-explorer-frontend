@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import AuthContext from '../../context/auth/authContext';
-import './Popup.css';
+import './RegisterPopup.css';
 
 const RegisterPopup = () => {
   const authContext = useContext(AuthContext);
@@ -48,24 +48,24 @@ const RegisterPopup = () => {
   };
 
   return (
-    <div className={`popup ${isRegisterOpen ? 'popup_opened' : ''}`}>
-      <div className="popup__container">
+    <div className={`registerPopup ${isRegisterOpen ? 'registerPopup_opened' : ''}`}>
+      <div className="registerPopup__container">
         <button
           type="button"
-          className="popup__close-button"
-          aria-label="close popup"
+          className="registerPopup__close-button"
+          aria-label="close registerPopup"
           onClick={closeAllPopups}
         />
-        <form action="submit" onSubmit={onSubmit} className="popup__form">
-          <h3 className="popup__heading">Sign up</h3>
-          <fieldset className="popup__form-group">
-            <label htmlFor="email" className="popup__form-label">
+        <form action="submit" onSubmit={onSubmit} className="registerPopup__form">
+          <h3 className="registerPopup__heading">Sign up</h3>
+          <fieldset className="registerPopup__form-group">
+            <label htmlFor="email" className="registerPopup__form-label">
               Email
               <input
                 id="email"
                 type="text"
                 name="email"
-                className="popup__form-field"
+                className="registerPopup__form-field"
                 label="Email"
                 placeholder="Enter email"
                 value={email}
@@ -73,26 +73,26 @@ const RegisterPopup = () => {
                 onChange={onChange}
               />
             </label>
-            <label htmlFor="password" className="popup__form-label">
+            <label htmlFor="password" className="registerPopup__form-label">
               Password
               <input
                 id="password"
                 type="text"
                 name="password"
-                className="popup__form-field"
+                className="registerPopup__form-field"
                 placeholder="Enter password"
                 value={password}
                 required
                 onChange={onChange}
               />
             </label>
-            <label htmlFor="name" className="popup__form-label">
+            <label htmlFor="name" className="registerPopup__form-label">
               Username
               <input
                 id="name"
                 type="text"
                 name="name"
-                className="popup__form-field"
+                className="registerPopup__form-field"
                 placeholder="Enter your username"
                 value={name}
                 required
@@ -100,9 +100,9 @@ const RegisterPopup = () => {
               />
             </label>
           </fieldset>
-          <input type="submit" className="popup__button" value="Sign up" onClick={openSuccess} />
-          <button type="button" className="popup__message_link" onClick={openLogin}>
-            <span className="popup__message">or </span>
+          <input type="submit" className="registerPopup__button" value="Sign up" onClick={openSuccess} />
+          <button type="button" className="registerPopup__message_link" onClick={openLogin}>
+            <span className="registerPopup__message">or </span>
             Sign in
           </button>
         </form>
