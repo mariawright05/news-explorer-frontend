@@ -13,19 +13,19 @@ const Footer = () => {
             <Link to="/" className="footer__nav-link">Home</Link>
           </li>
           <li className="footer__nav-text">
-            <Link to="https://practicum.yandex.com/web/" className="footer__nav-link">Practicum by Yandex</Link>
+            <a href="https://practicum.yandex.com/web/" target="_blank" rel="noreferrer" className="footer__nav-link">Practicum by Yandex</a>
           </li>
         </div>
         <div className="footer__nav-icon-wrapper">
           <li>
-            <Link to="https://github.com/mariawright05" className="footer__nav-icon">
+            <a href="https://github.com/mariawright05" rel="noreferrer" target="_blank" className="footer__nav-icon">
               <FaGithub />
-            </Link>
+            </a>
           </li>
           <li>
-            <Link to="https://www.linkedin.com/in/mariawright05/" className="footer__nav-icon">
+            <a href="https://www.linkedin.com/in/mariawright05/" rel="noreferrer" target="_blank" className="footer__nav-icon">
               <FaLinkedin />
-            </Link>
+            </a>
           </li>
         </div>
       </ul>

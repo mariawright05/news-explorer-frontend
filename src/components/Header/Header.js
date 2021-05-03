@@ -133,7 +133,7 @@ const Header = () => {
         />
       </div>
       <div className={`header__sidebar ${isSidebarOpen ? 'header__sidebar_opened' : ''}`}>
-        <ul className="header__nav-container_sidebar">
+        <ul className="header__sidebar-container">
           {navLinks}
         </ul>
       </div>
