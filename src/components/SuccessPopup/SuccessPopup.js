@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import AuthContext from '../../context/auth/authContext';
-import './Popup.css';
+import './SuccessPopup.css';
 
 const SuccessPopup = () => {
   const authContext = useContext(AuthContext);

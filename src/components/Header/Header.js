@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 // import Sidebar from '../Sidebar/Sidebar';
 import LoginPopup from '../LoginPopup/LoginPopup';
 import RegisterPopup from '../Popup/RegisterPopup';
-import SuccessPopup from '../Popup/SuccessPopup';
+import SuccessPopup from '../SuccessPopup/SuccessPopup';
 import PageContext from '../../context/page/PageContext';
 import AuthContext from '../../context/auth/authContext';
 import './Header.css';
