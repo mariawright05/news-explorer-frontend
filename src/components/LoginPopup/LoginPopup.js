@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 // import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
-import './Popup.css';
+import './LoginPopup.css';
 
 const LoginPopup = () => {
   const authContext = useContext(AuthContext);
@@ -43,24 +43,24 @@ const LoginPopup = () => {
   };
 
   return (
-    <div className={`popup ${isLoginOpen ? 'popup_opened' : ''}`}>
-      <div className="popup__container">
+    <div className={`loginPopup ${isLoginOpen ? 'loginPopup_opened' : ''}`}>
+      <div className="loginPopup__container">
         <button
           type="button"
-          className="popup__close-button"
-          aria-label="close popup"
+          className="loginPopup__close-button"
+          aria-label="close loginPopup"
           onClick={closeAllPopups}
         />
-        <form action="submit" onSubmit={onSubmit} className="popup__form">
-          <h3 className="popup__heading">Sign in</h3>
-          <fieldset className="popup__form-group">
-            <label htmlFor="email" className="popup__form-label">
+        <form action="submit" onSubmit={onSubmit} className="loginPopup__form">
+          <h3 className="loginPopup__heading">Sign in</h3>
+          <fieldset className="loginPopup__form-group">
+            <label htmlFor="email" className="loginPopup__form-label">
               Email
               <input
                 id="email"
                 type="text"
                 name="email"
-                className="popup__form-field"
+                className="loginPopup__form-field"
                 label="Email"
                 placeholder="Enter email"
                 value={email}
@@ -68,13 +68,13 @@ const LoginPopup = () => {
                 onChange={onChange}
               />
             </label>
-            <label htmlFor="password" className="popup__form-label">
+            <label htmlFor="password" className="loginPopup__form-label">
               Password
               <input
                 id="password"
                 type="text"
                 name="password"
-                className="popup__form-field"
+                className="loginPopup__form-field"
                 placeholder="Enter password"
                 value={password}
                 required
@@ -82,9 +82,9 @@ const LoginPopup = () => {
               />
             </label>
           </fieldset>
-          <input type="submit" className="popup__button" value="Sign in" />
-          <button type="button" className="popup__message_link" onClick={openRegister}>
-            <span className="popup__message">or </span>
+          <input type="submit" className="loginPopup__button" value="Sign in" />
+          <button type="button" className="loginPopup__message_link" onClick={openRegister}>
+            <span className="loginPopup__message">or </span>
             Sign up
           </button>
         </form>

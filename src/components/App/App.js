@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import Footer from '../Footer/Footer';
-import Popup from '../Popup/LoginPopup';
+import Popup from '../LoginPopup/LoginPopup';
 import NewsState from '../../context/news/NewsState';
 import AuthState from '../../context/auth/AuthState';
 import './App.css';

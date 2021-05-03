@@ -3,7 +3,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 // import Sidebar from '../Sidebar/Sidebar';
-import LoginPopup from '../Popup/LoginPopup';
+import LoginPopup from '../LoginPopup/LoginPopup';
 import RegisterPopup from '../Popup/RegisterPopup';
 import SuccessPopup from '../Popup/SuccessPopup';
 import PageContext from '../../context/page/PageContext';
