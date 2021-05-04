@@ -48,7 +48,7 @@
   text-align: left;
 }
 
-.successPopup__form-group {
+/* .successPopup__form-group {
   padding: 22px 0 10px;
   margin: 0;
   border: none;
@@ -103,7 +103,7 @@
   background-color: #E6E8EB;
   border: 1px solid rgb(0, 0, 0, 0.2);
   color: #B6BCBF;
-}
+} */
 
 .successPopup__message {
   font-size: 14px;

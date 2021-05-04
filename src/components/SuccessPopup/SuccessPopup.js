@@ -16,17 +16,17 @@ const SuccessPopup = () => {
   };
 
   return (
-    <div className={`popup ${isSuccessOpen ? 'popup_opened' : ''}`}>
-      <div className="popup__container">
+    <div className={`successPopup ${isSuccessOpen ? 'successPopup_opened' : ''}`}>
+      <div className="successPopup__container">
         <button
           type="button"
-          className="popup__close-button"
-          aria-label="close popup"
+          className="successPopup__close-button"
+          aria-label="close successPopup"
           onClick={closeAllPopups}
         />
-        <div className="popup__form">
-          <h3 className="popup__heading">Registration successfully completed!</h3>
-          <button type="button" className="popup__message_link left-justified" onClick={openLogin}>
+        <div className="successPopup__form">
+          <h3 className="successPopup__heading">Registration successfully completed!</h3>
+          <button type="button" className="successPopup__message_link left-justified" onClick={openLogin}>
             Sign in
           </button>
         </div>

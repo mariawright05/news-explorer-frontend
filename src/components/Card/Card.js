@@ -53,6 +53,12 @@ const Card = ({ card }) => {
     }
   };
 
+  const handleSaveHover = () => {
+    if (!(iconHoverMessage === undefined)) {
+      setIconHoverShown(true);
+    }
+  };
+
   return (
     <li className="card">
       <img className="card__image" src={image} alt={title} />
@@ -60,7 +66,7 @@ const Card = ({ card }) => {
         type="button"
         className={cardButtonType}
         onClick={page === 'saved-news' ? handleDeleteClick : handleSaveClick}
-        onMouseEnter={!(iconHoverMessage === undefined) && (() => { setIconHoverShown(true); })}
+        onMouseEnter={handleSaveHover}
         onMouseLeave={() => { setIconHoverShown(false); }}
         aria-label="card action"
       />

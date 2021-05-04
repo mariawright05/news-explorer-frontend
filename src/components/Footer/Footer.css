@@ -19,10 +19,14 @@
 
 .footer__nav {
   display: flex;
-  list-style-type: none;
   align-items: flex-end;
   padding: 0;
   margin: 0;
+}
+
+.footer__nav-list {
+  display: flex;
+  flex-direction: row;
 }
 
 .footer__nav-text-wrapper {
@@ -32,6 +36,7 @@
 
 .footer__nav-text {
   padding: 0 25px;
+  list-style-type: none;
 }
 
 .footer__nav-link {
@@ -50,6 +55,7 @@
   height: 20px;
   padding-left: 28px;
   color: #1a1b22;
+  list-style-type: none;
 }
 
 @media screen and (max-width: 768px) {

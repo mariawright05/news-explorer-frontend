@@ -18,7 +18,7 @@
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   min-height: 272px;
-  background-size: cover;
+  object-fit: cover;
   background-position: center center;
 }
 
