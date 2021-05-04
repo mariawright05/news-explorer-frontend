@@ -3,6 +3,7 @@ import { slice, concat } from 'lodash';
 import './CardList.css';
 import Card from '../Card/Card';
 import Preloader from '../Preloader/Preloader';
+// import NothingFound from '../NothingFound/NothingFound';
 import NewsContext from '../../context/news/newsContext';
 import PageContext from '../../context/page/PageContext';
 import { ARRAY_LENGTH, LIMIT } from '../../utils/configData.json';
@@ -11,7 +12,11 @@ const CardList = () => {
   const newsContext = useContext(NewsContext);
   const page = useContext(PageContext);
 
-  const { loading, cards, visibleList } = newsContext;
+  const {
+    loading,
+    cards,
+    visibleList,
+  } = newsContext;
 
   const [showMore, setShowMore] = useState(true);
   const [list, setList] = useState([]);

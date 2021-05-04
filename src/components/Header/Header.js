@@ -34,22 +34,29 @@ const Header = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const linkColor = () => {
+    if (page === 'saved-news' && !isSidebarOpen) {
+      return 'header__color_alt';
+    }
+    return '';
+  };
+
   const authLinks = (
     <>
-      <li className={`header__nav-link-container ${page === 'saved-news' ? 'header__color_alt' : ''}`}>
+      <li className={`header__nav-link-container ${linkColor()}`}>
         <NavLink
           to="/"
-          className={`header__nav-link ${page === 'saved-news' ? 'header__color_alt' : ''}`}
+          className={`header__nav-link ${linkColor()}`}
           exact
           activeClassName="header__nav-link_active"
         >
           Home
         </NavLink>
       </li>
-      <li className={`header__nav-link-container ${page === 'saved-news' ? 'header__color_alt' : ''}`}>
+      <li className={`header__nav-link-container ${linkColor()}`}>
         <NavLink
           to="/saved-news"
-          className={`header__nav-link ${page === 'saved-news' ? 'header__color_alt' : ''}`}
+          className={`header__nav-link ${linkColor()}`}
           activeClassName="header__nav-link_alt_active"
         >
           Saved articles
@@ -57,12 +64,12 @@ const Header = () => {
       </li>
       <button
         type="button"
-        className={`header__nav-button ${page === 'saved-news' ? 'header__color_alt' : ''}`}
+        className={`header__nav-button ${linkColor()}`}
         onClick={logout}
       >
         {user.name}
         {
-          page === 'saved-news' ? (
+          page === 'saved-news' && !isSidebarOpen ? (
             <LogoutIconAlt className="header__icon_logout" />
           ) : (
             <LogoutIcon className="header__icon_logout" />
@@ -77,7 +84,7 @@ const Header = () => {
       <li className="header__nav-link-container">
         <NavLink
           to="/"
-          className={`header__nav-link ${page === 'saved-news' ? 'header__color_alt' : ''}`}
+          className={`header__nav-link ${linkColor()}`}
           activeClassName="header__nav-link_active"
         >
           Home
@@ -85,7 +92,7 @@ const Header = () => {
       </li>
       <button
         type="button"
-        className="header__nav-button signin"
+        className={`header__nav-button signin ${linkColor()}`}
         onClick={handleLoginOpen}
       >
         Sign in

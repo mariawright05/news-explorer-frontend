@@ -92,7 +92,7 @@ const NewsState = (props) => {
   ];
 
   const initialState = {
-    cards: [],
+    cards: tempCards,
     card: {},
     loading: false,
     visibleList: [],
