@@ -63,7 +63,7 @@ const RegisterPopup = () => {
               Email
               <input
                 id="email"
-                type="text"
+                type="email"
                 name="email"
                 className="registerPopup__form-field"
                 label="Email"
@@ -83,6 +83,7 @@ const RegisterPopup = () => {
                 placeholder="Enter password"
                 value={password}
                 required
+                minLength="6"
                 onChange={onChange}
               />
             </label>
@@ -97,6 +98,8 @@ const RegisterPopup = () => {
                 value={name}
                 required
                 onChange={onChange}
+                minLength="2"
+                maxLength="30"
               />
             </label>
           </fieldset>

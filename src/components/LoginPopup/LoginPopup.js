@@ -58,7 +58,7 @@ const LoginPopup = () => {
               Email
               <input
                 id="email"
-                type="text"
+                type="email"
                 name="email"
                 className="loginPopup__form-field"
                 label="Email"
@@ -78,6 +78,7 @@ const LoginPopup = () => {
                 placeholder="Enter password"
                 value={password}
                 required
+                minLength="6"
                 onChange={onChange}
               />
             </label>

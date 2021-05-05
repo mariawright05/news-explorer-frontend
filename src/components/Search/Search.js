@@ -5,12 +5,13 @@ import './Search.css';
 
 const Search = () => {
   const newsContext = useContext(NewsContext);
+  const { searchNews } = newsContext;
 
   const [text, setText] = useState('');
 
   const onSubmit = (e) => {
     e.preventDefault();
-    newsContext.searchNews(text);
+    searchNews(text);
   };
 
   const onChange = (e) => {
@@ -31,6 +32,7 @@ const Search = () => {
             placeholder="Enter topic"
             value={text}
             onChange={onChange}
+            required
           />
           <input
             type="submit"

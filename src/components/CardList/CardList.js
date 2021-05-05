@@ -3,7 +3,6 @@ import { slice, concat } from 'lodash';
 import './CardList.css';
 import Card from '../Card/Card';
 import Preloader from '../Preloader/Preloader';
-// import NothingFound from '../NothingFound/NothingFound';
 import NewsContext from '../../context/news/newsContext';
 import PageContext from '../../context/page/PageContext';
 import { ARRAY_LENGTH, LIMIT } from '../../utils/configData.json';
