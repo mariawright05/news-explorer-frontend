@@ -9,7 +9,7 @@ const Footer = () => {
       <p className="footer__copyright">&#169; 2021 Maria Wright, Powered by News API</p>
       <ul className="footer__nav">
         <li className="footer__nav-text-wrapper">
-          <ul className="footer__nav-list">
+          <ul className="footer__nav-text-list">
             <li className="footer__nav-text">
               <Link to="/" className="footer__nav-link">Home</Link>
             </li>
@@ -19,7 +19,7 @@ const Footer = () => {
           </ul>
         </li>
         <li className="footer__nav-icon-wrapper">
-          <ul className="footer__nav-list">
+          <ul className="footer__nav-icon-list">
             <li className="footer__nav-icon">
               <a href="https://github.com/mariawright05" rel="noreferrer" target="_blank" className="footer__nav-link">
                 <FaGithub />
