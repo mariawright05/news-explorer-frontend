@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React, { useContext, useState, useEffect } from 'react';
 import { slice, concat } from 'lodash';
 import './CardList.css';
 import Card from '../Card/Card';
 import Preloader from '../Preloader/Preloader';
+import NothingFound from '../NothingFound/NothingFound';
 import NewsContext from '../../context/news/newsContext';
 import PageContext from '../../context/page/PageContext';
 import { ARRAY_LENGTH, LIMIT } from '../../utils/configData.json';
@@ -40,8 +42,17 @@ const CardList = () => {
 
   const savedCards = cards.filter((e) => { return e.isSaved === true; });
 
+  function getRandom() {
+    return Math.random();
+  }
+
   if (loading) {
-    return <Preloader />;
+    const num = getRandom();
+    console.log(num);
+    if (num < 0.5) {
+      return <Preloader />;
+    }
+    return <NothingFound />;
   }
 
   const searchedList = (
