@@ -48,7 +48,6 @@ const CardList = () => {
 
   if (loading) {
     const num = getRandom();
-    console.log(num);
     if (num < 0.5) {
       return <Preloader />;
     }
