@@ -1,0 +1,5 @@
+{
+  "ARRAY_LENGTH": 50,
+  "CARD_DATA": "[...Array(ARRAY_LENGTH)]",
+  "LIMIT": 3
+}

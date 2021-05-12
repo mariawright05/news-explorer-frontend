@@ -1,0 +1,40 @@
+.nothingFound {
+	padding: 80px 0;
+	background-color: #f5f6f7;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.nothingFound__title {
+  font-family: 'Roboto Slab', Times, serif;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 30px;
+  margin-bottom: 0;
+}
+
+.nothingFound__text {
+	font-family: 'Roboto', Helvitica, sans-serif;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 24px;
+	color: #B6BCBF;
+	margin: 16px 0 0 0;
+  max-width: 250px;
+  text-align: center;
+}
+
+.nothingFound__circle {
+	display: block;
+	width: 80px;
+	height: 80px;
+	margin: auto;
+  background-image: url('../../images/not-found.svg');
+}
+
+@keyframes spin {
+	100% {
+		transform: rotate(360deg);
+	}
+}
