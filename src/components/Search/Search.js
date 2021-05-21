@@ -12,6 +12,7 @@ const Search = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     searchNews(text);
+    setText('');
   };
 
   const onChange = (e) => {
@@ -27,7 +28,7 @@ const Search = () => {
         <form className="search__input-wrapper" onSubmit={onSubmit}>
           <input
             type="text"
-            name="news"
+            name="text"
             className="search__input"
             placeholder="Enter topic"
             value={text}

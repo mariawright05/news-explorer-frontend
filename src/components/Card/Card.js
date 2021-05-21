@@ -8,13 +8,13 @@ import './Card.css';
 const Card = ({ card }) => {
   const {
     url,
-    image,
-    pubDate,
+    urlToImage,
+    publishedAt,
     title,
     description,
     source,
     isSaved,
-    keyword,
+    // keyword,
   } = card;
 
   const page = useContext(PageContext);
@@ -29,6 +29,15 @@ const Card = ({ card }) => {
   const handleDeleteClick = () => {
     setIsSaved(card);
     deleteCard(card.id);
+  };
+
+  const convertDateFormat = (p) => {
+    const pubdate = new Date(p).toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+    return pubdate;
   };
 
   const cardButtonType = `${
@@ -61,7 +70,7 @@ const Card = ({ card }) => {
 
   return (
     <li className="card">
-      <img className="card__image" src={image} alt={title} />
+      <img className="card__image" src={urlToImage} alt={title} />
       <button
         type="button"
         className={cardButtonType}
@@ -75,16 +84,16 @@ const Card = ({ card }) => {
           <p className="card__hover-text">{ iconHoverMessage }</p>
         </div>
       )}
-      {page === 'saved-news' && (
+      {/* {page === 'saved-news' && (
         <div className="card__keyword-wrapper">
           <p className="card__keyword-text">{keyword}</p>
         </div>
-      )}
+      )} */}
       <a href={url} target="_blank" rel="noopener noreferrer" className="card__text-wrapper">
-        <p className="card__pubDate">{pubDate}</p>
+        <p className="card__pubDate">{convertDateFormat(publishedAt)}</p>
         <h3 className="card__title">{title}</h3>
         <p className="card__description">{description}</p>
-        <p className="card__source">{source}</p>
+        <p className="card__source">{source.name}</p>
       </a>
     </li>
   );

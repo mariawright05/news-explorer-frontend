@@ -42,16 +42,8 @@ const CardList = () => {
 
   const savedCards = cards.filter((e) => { return e.isSaved === true; });
 
-  function getRandom() {
-    return Math.random();
-  }
-
   if (loading) {
-    const num = getRandom();
-    if (num < 0.5) {
-      return <Preloader />;
-    }
-    return <NothingFound />;
+    return <Preloader />;
   }
 
   const searchedList = (

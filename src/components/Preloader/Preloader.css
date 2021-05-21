@@ -6,6 +6,14 @@
 	align-items: center;
 }
 
+.preloader__title {
+  font-family: 'Roboto Slab', Times, serif;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 30px;
+  margin-bottom: 0;
+}
+
 .preloader__text {
 	font-family: 'Roboto', Helvitica, sans-serif;
 	font-weight: 400;
@@ -13,6 +21,8 @@
 	line-height: 24px;
 	color: #B6BCBF;
 	margin: 24px 0 0 0;
+	max-width: 250px;
+  text-align: center;
 }
 
 .preloader__circle {
@@ -24,6 +34,14 @@
 	border-radius: 50%;
 	margin: auto;
 	animation: spin .75s infinite linear;
+}
+
+.preloader__nothingFound {
+	display: block;
+	width: 80px;
+	height: 80px;
+	margin: auto;
+  background-image: url('../../images/not-found.svg');
 }
 
 @keyframes spin {

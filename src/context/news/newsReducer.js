@@ -6,6 +6,7 @@ import {
   SET_LOADING,
   SET_SAVED,
   SET_NOT_SAVED,
+  SEARCH_ERROR,
 } from '../types';
 import { LIMIT } from '../../utils/configData.json';
 
@@ -22,6 +23,11 @@ export default (state, action) => {
       return {
         ...state,
         loading: true,
+      };
+    case SEARCH_ERROR:
+      return {
+        ...state,
+        searchError: true,
       };
     case SET_SAVED:
       return {

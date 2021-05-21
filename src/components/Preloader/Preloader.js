@@ -1,12 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import NewsContext from '../../context/news/newsContext';
 import './Preloader.css';
 
 const Preloader = () => {
+  const newsContext = useContext(NewsContext);
+  const { cards, searchError } = newsContext;
+
   return (
-    <div className="preloader">
-      <i className="preloader__circle" />
-      <p className="preloader__text">Searching for news...</p>
-    </div>
+    <section className="preloader">
+      {cards.length === 0
+        ? (
+          <>
+            <i className="preloader__nothingFound" />
+            <h3 className="preloader__title">
+              {searchError ? 'Server Error' : 'Nothing found'}
+            </h3>
+            <p className="preloader__text">
+              {searchError
+                ? 'Sorry, something went wrong during the request.'
+                : 'Sorry, but nothing matched your search terms.'}
+            </p>
+          </>
+        )
+        : (
+          <>
+            <i className="preloader__circle" />
+            <p className="preloader__text">Searching for news...</p>
+          </>
+        )}
+    </section>
   );
 };
 
