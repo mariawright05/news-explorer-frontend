@@ -7,13 +7,13 @@ import {
   SET_SAVED,
   SET_NOT_SAVED,
   SEARCH_ERROR,
+  NOT_FOUND,
 } from '../types';
 import { LIMIT } from '../../utils/configData.json';
 
 export default (state, action) => {
   switch (action.type) {
     case SEARCHED_NEWS:
-      console.log('#6 inside searched_news reducer, action.payload.length = ', action.payload.length);
       return {
         ...state,
         cards: action.payload,
@@ -21,16 +21,21 @@ export default (state, action) => {
         loading: false,
       };
     case SET_LOADING:
-      console.log('#3 inside set_loading reducer and loading will be true');
       return {
         ...state,
         loading: true,
+        searchError: false,
+        notFound: false,
       };
     case SEARCH_ERROR:
-      console.log('inside search_error reducer and searchError will be true');
       return {
         ...state,
         searchError: true,
+      };
+    case NOT_FOUND:
+      return {
+        ...state,
+        notFound: true,
       };
     case SET_SAVED:
       return {

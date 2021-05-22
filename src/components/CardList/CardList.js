@@ -18,6 +18,7 @@ const CardList = () => {
     cards,
     visibleList,
     searchError,
+    notFound,
   } = newsContext;
 
   const [showMore, setShowMore] = useState(true);
@@ -46,6 +47,10 @@ const CardList = () => {
 
   if (loading) {
     return <Preloader />;
+  }
+
+  if (notFound || searchError) {
+    return <NothingFound />;
   }
 
   const searchedList = (

@@ -9,13 +9,13 @@ import NewsReducer from './newsReducer';
 import {
   SEARCHED_NEWS,
   SET_LOADING,
+  NOT_FOUND,
   DELETE_CARD,
   SET_SAVED,
   SET_NOT_SAVED,
   SEARCH_ERROR,
 } from '../types';
 import { SEARCH_URL, API_KEY } from '../../utils/configData.json';
-// import NothingFound from '../../components/NothingFound/NothingFound';
 
 const NewsState = (props) => {
   const initialState = {
@@ -24,19 +24,29 @@ const NewsState = (props) => {
     loading: false,
     visibleList: [],
     searchError: false,
+    notFound: false,
   };
 
   const [state, dispatch] = useReducer(NewsReducer, initialState);
 
   // Set Loading
   const setLoading = () => {
-    console.log('#2 setLoading called');
     dispatch({ type: SET_LOADING });
   };
 
+  const setSearchedNews = (res) => {
+    dispatch({
+      type: SEARCHED_NEWS,
+      payload: res.articles,
+    });
+  };
+
   const setSearchError = () => {
-    console.log('about to dispatch to search_error');
     dispatch({ type: SEARCH_ERROR });
+  };
+
+  const setNotFound = () => {
+    dispatch({ type: NOT_FOUND });
   };
 
   // Search News
@@ -45,26 +55,11 @@ const NewsState = (props) => {
     fetch(`${SEARCH_URL}?q=${searchTerm}&apiKey=${API_KEY}`)
       .then((res) => { return res.json(); })
       .then((res) => {
-        console.log('#4 fetched, now checking if res is ok. res.status = ', res.status);
-        if (res.status === 'ok') {
-          console.log('#5 res status was ok, and about to dispatch to searched_news');
-          dispatch({
-            type: SEARCHED_NEWS,
-            payload: res.articles,
-          });
-        }
+        res.status === 'ok' && setSearchedNews(res);
+        return res;
       })
-      // .then((cards) => {
-      //   console.log(cards.length);
-      //   if (cards.length === 0) {
-      //     console.log('no cards were found');
-      //       <NothingFound />;
-      //   }
-      // })
-      .catch(() => {
-        console.log('In catch statement');
-        setSearchError();
-      });
+      .then((res) => { res.articles.length === 0 && setNotFound(); })
+      .catch(() => { setSearchError(); });
   };
 
   // Set isSaved
@@ -108,6 +103,7 @@ const NewsState = (props) => {
         visibleList: state.visibleList,
         isSaved: state.isSaved,
         searchError: state.searchError,
+        notFound: state.notFound,
         setLoading,
         setIsSaved,
         searchNews,
