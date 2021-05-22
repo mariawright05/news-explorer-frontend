@@ -8,6 +8,7 @@ import {
   SET_NOT_SAVED,
   SEARCH_ERROR,
   NOT_FOUND,
+  SET_QUERY,
 } from '../types';
 import { LIMIT } from '../../utils/configData.json';
 
@@ -43,6 +44,7 @@ export default (state, action) => {
         cards: state.cards.map((card) => {
           if (card.url === action.payload) {
             card.isSaved = true;
+            card.keyword = state.query;
           }
           return card;
         }),
@@ -65,6 +67,11 @@ export default (state, action) => {
             return card.url !== action.payload;
           },
         ),
+      };
+    case SET_QUERY:
+      return {
+        ...state,
+        query: action.payload,
       };
     default:
       return state;

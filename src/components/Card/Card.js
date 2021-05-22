@@ -14,7 +14,7 @@ const Card = ({ card }) => {
     description,
     source,
     isSaved,
-    // keyword,
+    keyword,
   } = card;
 
   const page = useContext(PageContext);
@@ -84,11 +84,11 @@ const Card = ({ card }) => {
           <p className="card__hover-text">{ iconHoverMessage }</p>
         </div>
       )}
-      {/* {page === 'saved-news' && (
+      {page === 'saved-news' && (
         <div className="card__keyword-wrapper">
           <p className="card__keyword-text">{keyword}</p>
         </div>
-      )} */}
+      )}
       <a href={url} target="_blank" rel="noopener noreferrer" className="card__text-wrapper">
         <p className="card__pubDate">{convertDateFormat(publishedAt)}</p>
         <h3 className="card__title">{title}</h3>

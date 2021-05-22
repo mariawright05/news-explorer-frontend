@@ -14,6 +14,7 @@ import {
   SET_SAVED,
   SET_NOT_SAVED,
   SEARCH_ERROR,
+  SET_QUERY,
 } from '../types';
 import { SEARCH_URL, API_KEY } from '../../utils/configData.json';
 
@@ -76,6 +77,14 @@ const NewsState = (props) => {
       });
   };
 
+  // Set current query term
+  const setQuery = (query) => {
+    dispatch({
+      type: SET_QUERY,
+      payload: query,
+    });
+  };
+
   // Set card button type
   const setCardButtonType = (card, page) => {
     if (page === 'saved-news') {
@@ -104,11 +113,13 @@ const NewsState = (props) => {
         isSaved: state.isSaved,
         searchError: state.searchError,
         notFound: state.notFound,
+        keyword: state.keyword,
         setLoading,
         setIsSaved,
         searchNews,
         deleteCard,
         setCardButtonType,
+        setQuery,
       }}
     >
       {props.children}

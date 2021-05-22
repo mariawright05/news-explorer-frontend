@@ -5,13 +5,14 @@ import './Search.css';
 
 const Search = () => {
   const newsContext = useContext(NewsContext);
-  const { searchNews } = newsContext;
+  const { searchNews, setQuery } = newsContext;
 
   const [text, setText] = useState('');
 
   const onSubmit = (e) => {
     e.preventDefault();
     searchNews(text);
+    setQuery(text);
     setText('');
   };
 
