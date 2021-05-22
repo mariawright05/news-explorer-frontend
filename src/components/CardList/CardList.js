@@ -17,12 +17,14 @@ const CardList = () => {
     loading,
     cards,
     visibleList,
+    searchError,
   } = newsContext;
 
   const [showMore, setShowMore] = useState(true);
   const [list, setList] = useState([]);
   const [index, setIndex] = useState(LIMIT);
 
+  // eslint-disable-next-line consistent-return
   const showInitialList = () => {
     setList(visibleList);
   };

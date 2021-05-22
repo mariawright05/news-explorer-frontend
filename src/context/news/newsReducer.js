@@ -13,6 +13,7 @@ import { LIMIT } from '../../utils/configData.json';
 export default (state, action) => {
   switch (action.type) {
     case SEARCHED_NEWS:
+      console.log('#6 inside searched_news reducer, action.payload.length = ', action.payload.length);
       return {
         ...state,
         cards: action.payload,
@@ -20,11 +21,13 @@ export default (state, action) => {
         loading: false,
       };
     case SET_LOADING:
+      console.log('#3 inside set_loading reducer and loading will be true');
       return {
         ...state,
         loading: true,
       };
     case SEARCH_ERROR:
+      console.log('inside search_error reducer and searchError will be true');
       return {
         ...state,
         searchError: true,
