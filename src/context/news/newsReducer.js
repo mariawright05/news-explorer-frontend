@@ -41,7 +41,7 @@ export default (state, action) => {
       return {
         ...state,
         cards: state.cards.map((card) => {
-          if (card.id === action.payload) {
+          if (card.url === action.payload) {
             card.isSaved = true;
           }
           return card;
@@ -51,7 +51,7 @@ export default (state, action) => {
       return {
         ...state,
         cards: state.cards.map((card) => {
-          if (card.id === action.payload) {
+          if (card.url === action.payload) {
             card.isSaved = false;
           }
           return card;
@@ -62,7 +62,7 @@ export default (state, action) => {
         ...state,
         cards: state.cards.filter(
           (card) => {
-            return card.id !== action.payload;
+            return card.url !== action.payload;
           },
         ),
       };

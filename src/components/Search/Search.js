@@ -11,7 +11,6 @@ const Search = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log('#1 calling searchNews function with text: ', text);
     searchNews(text);
     setText('');
   };

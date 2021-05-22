@@ -68,11 +68,11 @@ const NewsState = (props) => {
     card.isSaved
       ? dispatch({
         type: SET_NOT_SAVED,
-        payload: card.id,
+        payload: card.url,
       })
       : dispatch({
         type: SET_SAVED,
-        payload: card.id,
+        payload: card.url,
       });
   };
 
@@ -91,7 +91,7 @@ const NewsState = (props) => {
   const deleteCard = (card) => {
     dispatch({
       type: DELETE_CARD,
-      payload: card,
+      payload: card.url,
     });
   };
 

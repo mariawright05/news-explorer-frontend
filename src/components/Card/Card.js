@@ -28,7 +28,7 @@ const Card = ({ card }) => {
 
   const handleDeleteClick = () => {
     setIsSaved(card);
-    deleteCard(card.id);
+    deleteCard(card);
   };
 
   const convertDateFormat = (p) => {
