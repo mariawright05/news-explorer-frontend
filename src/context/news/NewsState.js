@@ -10,7 +10,6 @@ import {
   SEARCHED_NEWS,
   SET_LOADING,
   NOT_FOUND,
-  DELETE_CARD,
   SET_SAVED,
   SET_NOT_SAVED,
   SEARCH_ERROR,
@@ -96,14 +95,6 @@ const NewsState = (props) => {
     }
   };
 
-  // Delete Card
-  const deleteCard = (card) => {
-    dispatch({
-      type: DELETE_CARD,
-      payload: card.url,
-    });
-  };
-
   return (
     <NewsContext.Provider
       value={{
@@ -117,7 +108,6 @@ const NewsState = (props) => {
         setLoading,
         setIsSaved,
         searchNews,
-        deleteCard,
         setCardButtonType,
         setQuery,
       }}

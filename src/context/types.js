@@ -3,7 +3,6 @@ export const SET_SAVED = 'SET_SAVED';
 export const SET_LOADING = 'SET_LOADING';
 export const SEARCH_ERROR = 'SEARCH_ERROR';
 export const NOT_FOUND = 'NOT_FOUND';
-export const DELETE_CARD = 'DELETE_CARD';
 export const SET_QUERY = 'SET_QUERY';
 export const SET_NOT_SAVED = 'SET_NOT_SAVED';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';

@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { slice } from 'lodash';
 import {
-  DELETE_CARD,
   SEARCHED_NEWS,
   SET_LOADING,
   SET_SAVED,
@@ -58,15 +57,6 @@ export default (state, action) => {
           }
           return card;
         }),
-      };
-    case DELETE_CARD:
-      return {
-        ...state,
-        cards: state.cards.filter(
-          (card) => {
-            return card.url !== action.payload;
-          },
-        ),
       };
     case SET_QUERY:
       return {

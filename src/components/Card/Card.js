@@ -21,14 +21,13 @@ const Card = ({ card }) => {
   const newsContext = useContext(NewsContext);
   const authContext = useContext(AuthContext);
 
-  const { deleteCard, setIsSaved } = newsContext;
+  const { setIsSaved } = newsContext;
   const { isAuth } = authContext;
 
   const [iconHoverShown, setIconHoverShown] = useState(false);
 
   const handleDeleteClick = () => {
     setIsSaved(card);
-    deleteCard(card);
   };
 
   const convertDateFormat = (p) => {
