@@ -1,6 +1,9 @@
-import React, { useState, useContext } from 'react';
+/* eslint-disable no-use-before-define */
+/* eslint-disable arrow-body-style */
+import React, { useContext } from 'react';
 import AuthContext from '../../context/auth/authContext';
 import './RegisterPopup.css';
+import useForm from '../../utils/useForm';
 
 const RegisterPopup = () => {
   const authContext = useContext(AuthContext);
@@ -13,6 +16,10 @@ const RegisterPopup = () => {
     closeAllPopups,
   } = authContext;
 
+  const setRegister = () => register(values);
+
+  const { values, onChange, onSubmit } = useForm(setRegister);
+
   // useEffect(() => {
   //   if (isAuthenticated) {
   //     props.history.push('/');
@@ -20,22 +27,22 @@ const RegisterPopup = () => {
   // // eslint-disable-next-line
   // }, [isAuthenticated, props.history])
 
-  const [user, setUser] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
+  // const [user, setUser] = useState({
+  //   name: '',
+  //   email: '',
+  //   password: '',
+  // });
 
-  const { name, email, password } = user;
+  // const { name, email, password } = user;
 
-  const onChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
+  // const onChange = (e) => {
+  //   setUser({ ...user, [e.target.name]: e.target.value });
+  // };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    register({ name, email, password });
-  };
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+  //   register({ name, email, password });
+  // };
 
   const openLogin = () => {
     closeAllPopups();
@@ -68,7 +75,7 @@ const RegisterPopup = () => {
                 className="registerPopup__form-field"
                 label="Email"
                 placeholder="Enter email"
-                value={email}
+                value={values.email || ''}
                 required
                 onChange={onChange}
               />
@@ -81,7 +88,7 @@ const RegisterPopup = () => {
                 name="password"
                 className="registerPopup__form-field"
                 placeholder="Enter password"
-                value={password}
+                value={values.password || ''}
                 required
                 minLength="6"
                 onChange={onChange}
@@ -95,7 +102,7 @@ const RegisterPopup = () => {
                 name="name"
                 className="registerPopup__form-field"
                 placeholder="Enter your username"
-                value={name}
+                value={values.name || ''}
                 required
                 onChange={onChange}
                 minLength="2"
