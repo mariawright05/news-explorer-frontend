@@ -2,7 +2,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-// import Sidebar from '../Sidebar/Sidebar';
 import LoginPopup from '../LoginPopup/LoginPopup';
 import RegisterPopup from '../RegisterPopup/RegisterPopup';
 import SuccessPopup from '../SuccessPopup/SuccessPopup';

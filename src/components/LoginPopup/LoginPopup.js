@@ -21,7 +21,6 @@ const LoginPopup = () => {
   // }, [isAuthenticated, props.history])
 
   const [user, setUser] = useState({
-    name: 'Elise',
     email: '',
     password: '',
   });
