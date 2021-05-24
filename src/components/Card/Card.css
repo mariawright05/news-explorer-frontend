@@ -22,6 +22,15 @@
   background-position: center center;
 }
 
+.card__image::before {
+  content: ' ';
+  background-size: cover;
+  background-image: url(../../images/no-image.png);
+  min-height: 272px;
+  display: block;
+  background-position: center center;
+}
+
 .card__text-wrapper {
   padding: 24px;
   display: flex;
@@ -193,6 +202,10 @@
   }
 
   .card__image {
+    min-height: 150px;
+  }
+
+  .card__image::before {
     min-height: 150px;
   }
 
