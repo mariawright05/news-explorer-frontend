@@ -8,10 +8,10 @@ import './UserInfo.css';
 
 const UserInfo = () => {
   const newsContext = useContext(NewsContext);
-  const { cards } = newsContext;
+  const { savedCards } = newsContext;
 
   // Extracts keywords from objects in saved cards array
-  const extractArr = cards.map((a) => { return a.keyword; });
+  const extractArr = savedCards.map((a) => { return a.keyword; });
 
   // Takes out undefined values from array
   const filteredArr = extractArr.filter((keyword) => {
@@ -48,17 +48,17 @@ const UserInfo = () => {
     return shortList;
   };
 
+  const numArticles = () => {
+    return filteredArr.length === 1
+      ? 'Elise, you have 1 saved article'
+      : `Elise, you have ${filteredArr.length} saved articles`;
+  };
+
   return (
     <div className="userInfo">
       <div className="userInfo__container">
         <h1 className="userInfo__title">Saved articles</h1>
-        <p className="userInfo__stats">
-          Elise, you have
-          &nbsp;
-          {filteredArr.length}
-          &nbsp;
-          saved articles
-        </p>
+        <p className="userInfo__stats">{numArticles()}</p>
         <p className="userInfo__keywords">
           By keywords:
           <span className="userInfo__keywords_strong">

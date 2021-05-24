@@ -2,6 +2,8 @@
 /* eslint-disable quote-props */
 /* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
+/* eslint-disable-next-line no-unused-expressions */
+
 import React, { useReducer } from 'react';
 // import axios from 'axios';
 import NewsContext from './newsContext';
@@ -14,6 +16,7 @@ import {
   SET_NOT_SAVED,
   SEARCH_ERROR,
   SET_QUERY,
+  SAVED_CARDS,
 } from '../types';
 import { SEARCH_URL, API_KEY } from '../../utils/configData.json';
 
@@ -25,6 +28,7 @@ const NewsState = (props) => {
     visibleList: [],
     searchError: false,
     notFound: false,
+    savedCards: [],
   };
 
   const [state, dispatch] = useReducer(NewsReducer, initialState);
@@ -34,24 +38,26 @@ const NewsState = (props) => {
     dispatch({ type: SET_LOADING });
   };
 
+  // Adds news results to card list
   const setSearchedNews = (res) => {
     state.cards = [];
-    console.log(state.cards.length);
     dispatch({
       type: SEARCHED_NEWS,
       payload: res.articles,
     });
   };
 
+  // Assigns searchError to true if server error
   const setSearchError = () => {
     dispatch({ type: SEARCH_ERROR });
   };
 
+  // Assigns notFound to true if no news found
   const setNotFound = () => {
     dispatch({ type: NOT_FOUND });
   };
 
-  // Search News
+  // Fetch news from NewsAPI
   const searchNews = (searchTerm) => {
     setLoading();
     const today = new Date();
@@ -70,9 +76,15 @@ const NewsState = (props) => {
       .catch(() => { setSearchError(); });
   };
 
-  // Set isSaved
+  // Updates saved card list
+  const setSavedCards = () => {
+    dispatch({
+      type: SAVED_CARDS,
+    });
+  };
+
+  // Sets if isSaved is true or false and assigns keyword
   const setIsSaved = (card) => {
-    // eslint-disable-next-line no-unused-expressions
     card.isSaved
       ? dispatch({
         type: SET_NOT_SAVED,
@@ -82,6 +94,7 @@ const NewsState = (props) => {
         type: SET_SAVED,
         payload: card.url,
       });
+    setSavedCards();
   };
 
   // Set current query term
@@ -92,7 +105,7 @@ const NewsState = (props) => {
     });
   };
 
-  // Set card button type
+  // Set card button type depending on card state or page
   const setCardButtonType = (card, page) => {
     if (page === 'saved-news') {
       card.cardButtonType = 'card__icon_trash';
@@ -113,11 +126,13 @@ const NewsState = (props) => {
         searchError: state.searchError,
         notFound: state.notFound,
         keyword: state.keyword,
+        savedCards: state.savedCards,
         setLoading,
         setIsSaved,
         searchNews,
         setCardButtonType,
         setQuery,
+        setSavedCards,
       }}
     >
       {props.children}

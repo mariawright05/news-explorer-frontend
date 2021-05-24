@@ -8,6 +8,7 @@ import {
   SEARCH_ERROR,
   NOT_FOUND,
   SET_QUERY,
+  SAVED_CARDS,
 } from '../types';
 import { LIMIT } from '../../utils/configData.json';
 
@@ -63,6 +64,13 @@ export default (state, action) => {
       return {
         ...state,
         query: action.payload,
+      };
+    case SAVED_CARDS:
+      return {
+        ...state,
+        savedCards: state.cards.filter((card) => {
+          return card.isSaved === true;
+        }),
       };
     default:
       return state;

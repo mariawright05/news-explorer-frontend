@@ -20,6 +20,7 @@ const CardList = () => {
     visibleList,
     searchError,
     notFound,
+    savedCards,
   } = newsContext;
 
   // Determines if there are any more cards to show up to ARRAY_LENGTH
@@ -48,9 +49,6 @@ const CardList = () => {
     setList(newList);
     setShowMore(newShowMore);
   };
-
-  // Filters cards that are saved
-  const savedCards = cards.filter((e) => { return e.isSaved === true; });
 
   // Preloader || Not Found || Search Error block
   if (loading) {
