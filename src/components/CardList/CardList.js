@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable consistent-return */
 import React, { useContext, useState, useEffect } from 'react';
 import { slice, concat } from 'lodash';
 import './CardList.css';
@@ -21,30 +22,37 @@ const CardList = () => {
     notFound,
   } = newsContext;
 
+  // Determines if there are any more cards to show up to ARRAY_LENGTH
   const [showMore, setShowMore] = useState(true);
+  // Group of cards shown after each Show More button click
   const [list, setList] = useState([]);
+  // Count of cards to show up to ARRAY_LENGTH
   const [index, setIndex] = useState(LIMIT);
 
-  // eslint-disable-next-line consistent-return
-  const showInitialList = () => {
+  // Function to show initial cards, number determined by LIMIT
+  const showvisibleList = () => {
     setList(visibleList);
   };
 
+  // Resets initial cards with every search
   useEffect(() => {
-    showInitialList();
+    showvisibleList();
   }, [visibleList]);
 
+  // Load More button functionality
   const loadMore = () => {
     const newIndex = index + LIMIT;
-    const newShowMore = newIndex < (ARRAY_LENGTH - 1);
+    const newShowMore = newIndex < (Math.min(ARRAY_LENGTH - 1, cards.length));
     const newList = concat(list, slice(cards, index, newIndex));
     setIndex(newIndex);
     setList(newList);
     setShowMore(newShowMore);
   };
 
+  // Filters cards that are saved
   const savedCards = cards.filter((e) => { return e.isSaved === true; });
 
+  // Preloader || Not Found || Search Error block
   if (loading) {
     return <Preloader />;
   }
@@ -53,6 +61,7 @@ const CardList = () => {
     return <NothingFound />;
   }
 
+  // Displays cards on the home page
   const searchedList = (
     <>
       {cards.length !== 0 && <h2 className="cardList__title">Search results</h2>}
@@ -65,6 +74,7 @@ const CardList = () => {
     </>
   );
 
+  // Displays cards on the saved page
   const savedList = (
     <>
       <ul className="cardList__card-wrapper">

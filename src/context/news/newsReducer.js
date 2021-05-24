@@ -17,6 +17,7 @@ export default (state, action) => {
       return {
         ...state,
         cards: action.payload,
+        // Initial number of cards in list to show
         visibleList: slice(action.payload, 0, LIMIT),
         loading: false,
       };
@@ -43,7 +44,7 @@ export default (state, action) => {
         cards: state.cards.map((card) => {
           if (card.url === action.payload) {
             card.isSaved = true;
-            card.keyword = state.query;
+            card.keyword = state.query.charAt(0).toUpperCase() + state.query.slice(1);
           }
           return card;
         }),

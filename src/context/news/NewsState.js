@@ -35,6 +35,8 @@ const NewsState = (props) => {
   };
 
   const setSearchedNews = (res) => {
+    state.cards = [];
+    console.log(state.cards.length);
     dispatch({
       type: SEARCHED_NEWS,
       payload: res.articles,
@@ -52,7 +54,13 @@ const NewsState = (props) => {
   // Search News
   const searchNews = (searchTerm) => {
     setLoading();
-    fetch(`${SEARCH_URL}?q=${searchTerm}&apiKey=${API_KEY}`)
+    const today = new Date();
+    const lastWeek = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    // Formats date for API request parameter requirements
+    const ISOToday = today.toISOString();
+    const ISOLastWeek = lastWeek.toISOString();
+
+    fetch(`${SEARCH_URL}?q=${searchTerm}&apiKey=${API_KEY}&from=${ISOLastWeek}&to=${ISOToday}&pageSize=${100}&sortBy=publishedAt&language=en`)
       .then((res) => { return res.json(); })
       .then((res) => {
         res.status === 'ok' && setSearchedNews(res);
