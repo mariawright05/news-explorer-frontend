@@ -20,6 +20,7 @@
   min-height: 272px;
   object-fit: cover;
   background-position: center center;
+  border-bottom: 1px solid rgba(59, 74, 116, 0.1);
 }
 
 .card__image::before {
@@ -104,10 +105,12 @@
   cursor: pointer;
   border: none;
   position: absolute;
+  border-radius: 10px;
   top: 24px;
   right: 24px;
   background-color: transparent;
   transition: all 0.3s ease 0s;
+  box-shadow: 0px 10px 22px rgba(59, 74, 116, 0.1);
 }
 
 .card__icon_trash:hover {
@@ -127,6 +130,7 @@
   right: 24px;
   background-color: transparent;
   transition: all 0.3s ease 0s;
+  box-shadow: 0px 10px 22px rgba(59, 74, 116, 0.1);
 }
 
 .card__icon_save:hover {
@@ -150,6 +154,7 @@
   right: 24px;
   background-color: transparent;
   transition: all 0.3s ease 0s;
+  box-shadow: 0px 10px 22px rgba(59, 74, 116, 0.1);
 }
 
 .card__icon_save_true:focus {

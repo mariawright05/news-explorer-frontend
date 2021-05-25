@@ -13,7 +13,7 @@ const NothingFound = () => {
       <p className="nothingFound__title">{searchError ? 'Server Error' : 'Nothing found'}</p>
       <p className="nothingFound__text">
         {searchError
-          ? 'Sorry, something went wrong during the request.'
+          ? 'Sorry, something went wrong during the request. There may be a connection issue or the server may be down. Please try again later.'
           : 'Sorry, but nothing matched your search terms.'}
       </p>
     </section>
