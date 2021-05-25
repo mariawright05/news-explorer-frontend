@@ -25,8 +25,9 @@ const Search = () => {
   // };
 
   const searchCallback = () => {
-    searchNews(values);
-    setQuery(values);
+    searchNews(values.query);
+    setQuery(values.query);
+    // console.log('in Search, values: ', values);
   };
 
   const {
