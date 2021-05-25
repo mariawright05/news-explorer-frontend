@@ -61,11 +61,10 @@
   font-size: 12px;
   line-height: 14px;
   margin-top: 30px;
-
+  position: relative;
 }
 
 .loginPopup__form-label {
-  position: relative;
   color: #2f71e5;
   font-family: 'Inter', Helvetica, sans-serif;
   font-size: 12px;
@@ -82,20 +81,24 @@
   background-color: transparent;
 }
 
+.loginPopup__form-field:focus {
+  outline: 0;
+  border-bottom: 1px solid #000;
+}
+
 .loginPopup__error {
+  border-bottom: 1px solid red;
+}
+
+.loginPopup__error_visible {
   border-bottom: none;
   color: red;
   font-size: 12px;
   line-height: 15px;
   position: absolute;
-  top: 60px;
+  top: 45px;
   left: 0;
   z-index: 10;
-}
-
-.loginPopup__form-field:focus {
-  outline: 0;
-  border-bottom: 1px solid #000;
 }
 
 .loginPopup__button {

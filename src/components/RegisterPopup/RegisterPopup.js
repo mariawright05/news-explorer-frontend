@@ -1,15 +1,16 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable arrow-body-style */
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import AuthContext from '../../context/auth/authContext';
 import './RegisterPopup.css';
 import useForm from '../../utils/useForm';
+import validate from './validateRegister';
 
 const RegisterPopup = () => {
   const authContext = useContext(AuthContext);
   const {
     register,
-    // isAuthenticated,
+    isAuth,
     isRegisterOpen,
     handleLoginOpen,
     handleSuccessOpen,
@@ -18,31 +19,12 @@ const RegisterPopup = () => {
 
   const setRegister = () => register(values);
 
-  const { values, onChange, onSubmit } = useForm(setRegister);
-
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     props.history.push('/');
-  //   }
-  // // eslint-disable-next-line
-  // }, [isAuthenticated, props.history])
-
-  // const [user, setUser] = useState({
-  //   name: '',
-  //   email: '',
-  //   password: '',
-  // });
-
-  // const { name, email, password } = user;
-
-  // const onChange = (e) => {
-  //   setUser({ ...user, [e.target.name]: e.target.value });
-  // };
-
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   register({ name, email, password });
-  // };
+  const {
+    values,
+    onChange,
+    onSubmit,
+    errors,
+  } = useForm(setRegister, validate);
 
   const openLogin = () => {
     closeAllPopups();
@@ -53,6 +35,10 @@ const RegisterPopup = () => {
     closeAllPopups();
     handleSuccessOpen();
   };
+
+  useEffect(() => {
+    if (isAuth) openSuccess();
+  }, [isAuth]);
 
   return (
     <div className={`registerPopup ${isRegisterOpen ? 'registerPopup_opened' : ''}`}>
@@ -66,51 +52,57 @@ const RegisterPopup = () => {
         <form action="submit" onSubmit={onSubmit} className="registerPopup__form">
           <h3 className="registerPopup__heading">Sign up</h3>
           <fieldset className="registerPopup__form-group">
-            <label htmlFor="email" className="registerPopup__form-label">
+            <div className="registerPopup__field-group">
               Email
-              <input
-                id="email"
-                type="email"
-                name="email"
-                className="registerPopup__form-field"
-                label="Email"
-                placeholder="Enter email"
-                value={values.email || ''}
-                required
-                onChange={onChange}
-              />
-            </label>
-            <label htmlFor="password" className="registerPopup__form-label">
+              <label htmlFor="email" className="registerPopup__form-label">
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  className={`registerPopup__form-field ${errors.email && 'registerPopup__error'}`}
+                  label="Email"
+                  placeholder="Enter email"
+                  value={values.email || ''}
+                  required
+                  onChange={onChange}
+                />
+                {errors.email && <p className="registerPopup__error_visible">{errors.email}</p>}
+              </label>
+            </div>
+            <div className="registerPopup__field-group">
               Password
-              <input
-                id="password"
-                type="text"
-                name="password"
-                className="registerPopup__form-field"
-                placeholder="Enter password"
-                value={values.password || ''}
-                required
-                minLength="6"
-                onChange={onChange}
-              />
-            </label>
-            <label htmlFor="name" className="registerPopup__form-label">
+              <label htmlFor="password" className="registerPopup__form-label">
+                <input
+                  id="password"
+                  type="text"
+                  name="password"
+                  className={`registerPopup__form-field ${errors.password && 'registerPopup__error'}`}
+                  placeholder="Enter password"
+                  value={values.password || ''}
+                  required
+                  onChange={onChange}
+                />
+                {errors.password && <p className="registerPopup__error_visible">{errors.password}</p>}
+              </label>
+            </div>
+            <div className="registerPopup__field-group">
               Username
-              <input
-                id="name"
-                type="text"
-                name="name"
-                className="registerPopup__form-field"
-                placeholder="Enter your username"
-                value={values.name || ''}
-                required
-                onChange={onChange}
-                minLength="2"
-                maxLength="30"
-              />
-            </label>
+              <label htmlFor="username" className="registerPopup__form-label">
+                <input
+                  id="username"
+                  type="text"
+                  name="username"
+                  className={`registerPopup__form-field ${errors.username && 'registerPopup__error'}`}
+                  placeholder="Enter your username"
+                  value={values.username || ''}
+                  required
+                  onChange={onChange}
+                />
+                {errors.username && <p className="registerPopup__error_visible">{errors.username}</p>}
+              </label>
+            </div>
           </fieldset>
-          <input type="submit" className="registerPopup__button" value="Sign up" onClick={openSuccess} />
+          <input type="submit" className="registerPopup__button" value="Sign up" onClick={onSubmit} />
           <button type="button" className="registerPopup__message_link" onClick={openLogin}>
             <span className="registerPopup__message">or </span>
             Sign in

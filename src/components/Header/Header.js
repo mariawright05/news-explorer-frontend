@@ -10,9 +10,6 @@ import AuthContext from '../../context/auth/authContext';
 import './Header.css';
 import { ReactComponent as LogoutIcon } from '../../images/logout-white.svg';
 import { ReactComponent as LogoutIconAlt } from '../../images/logout-dark.svg';
-// import { ReactComponent as CloseSidebarIcon } from '../../images/close-menu-black.svg';
-// import { ReactComponent as OpenSidebarIcon } from '../../images/open-menu-white.svg';
-// import { ReactComponent as OpenSidebarIconAlt } from '../../images/open-menu-black.svg';
 
 const Header = () => {
   const page = useContext(PageContext);

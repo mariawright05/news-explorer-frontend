@@ -1,7 +1,6 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable arrow-body-style */
 import React, { useContext } from 'react';
-// import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 import './LoginPopup.css';
 import useForm from '../../utils/useForm';
@@ -25,31 +24,6 @@ const LoginPopup = () => {
     onSubmit,
     errors,
   } = useForm(setLogin, validate);
-
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     props.history.push('/');
-  //   }
-  // // eslint-disable-next-line
-  // }, [isAuthenticated, props.history])
-
-  // const [user, setUser] = useState({
-  //   email: '',
-  //   password: '',
-  // });
-
-  // const { email, password } = user;
-
-  // const onChange = (e) => {
-  //   setUser({ ...user, [e.target.name]: e.target.value });
-  // };
-
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   login(user);
-  // };
-
-  // const setLogin = () => login(values);
 
   const openRegister = () => {
     closeAllPopups();
@@ -75,14 +49,14 @@ const LoginPopup = () => {
                   id="email"
                   type="email"
                   name="email"
-                  className={`loginPopup__form-field ${errors.email && 'is-danger'}`}
+                  className={`loginPopup__form-field ${errors.email && 'loginPopup__error'}`}
                   label="Email"
                   placeholder="Enter email"
                   value={values.email || ''}
                   required
                   onChange={onChange}
                 />
-                {errors.email && <p className="loginPopup__error">{errors.email}</p>}
+                {errors.email && <p className="loginPopup__error_visible">{errors.email}</p>}
               </label>
             </div>
             <div className="loginPopup__field-group">
@@ -92,14 +66,13 @@ const LoginPopup = () => {
                   id="password"
                   type="text"
                   name="password"
-                  className={`loginPopup__form-field ${errors.password && 'is-danger'}`}
+                  className={`loginPopup__form-field ${errors.password && 'loginPopup__error'}`}
                   placeholder="Enter password"
                   value={values.password || ''}
                   required
-                  minLength="6"
                   onChange={onChange}
                 />
-                {errors.password && <p className="loginPopup__error">{errors.password}</p>}
+                {errors.password && <p className="loginPopup__error_visible">{errors.password}</p>}
               </label>
             </div>
           </fieldset>
