@@ -4,7 +4,9 @@ import React, { useContext } from 'react';
 // import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 import './LoginPopup.css';
+import 'bulma/css/bulma.css';
 import useForm from '../../utils/useForm';
+import validate from './validateLogin';
 
 const LoginPopup = () => {
   const authContext = useContext(AuthContext);
@@ -18,7 +20,12 @@ const LoginPopup = () => {
 
   const setLogin = () => login(values);
 
-  const { values, onChange, onSubmit } = useForm(setLogin);
+  const {
+    values,
+    onChange,
+    onSubmit,
+    errors,
+  } = useForm(setLogin, validate);
 
   // useEffect(() => {
   //   if (isAuthenticated) {
@@ -59,7 +66,7 @@ const LoginPopup = () => {
           aria-label="close loginPopup"
           onClick={closeAllPopups}
         />
-        <form action="submit" onSubmit={onSubmit} className="loginPopup__form">
+        <form action="submit" onSubmit={onSubmit} className="loginPopup__form" noValidate>
           <h3 className="loginPopup__heading">Sign in</h3>
           <fieldset className="loginPopup__form-group">
             <label htmlFor="email" className="loginPopup__form-label">
@@ -68,13 +75,14 @@ const LoginPopup = () => {
                 id="email"
                 type="email"
                 name="email"
-                className="loginPopup__form-field"
+                className={`loginPopup__form-field ${errors.email && 'is-danger'}`}
                 label="Email"
                 placeholder="Enter email"
                 value={values.email || ''}
                 required
                 onChange={onChange}
               />
+              {errors.email && <p className="help is-danger">{errors.email}</p>}
             </label>
             <label htmlFor="password" className="loginPopup__form-label">
               Password
@@ -82,13 +90,14 @@ const LoginPopup = () => {
                 id="password"
                 type="text"
                 name="password"
-                className="loginPopup__form-field"
+                className={`loginPopup__form-field ${errors.password && 'is-danger'}`}
                 placeholder="Enter password"
                 value={values.password || ''}
                 required
                 minLength="6"
                 onChange={onChange}
               />
+              {errors.password && <p className="help is-danger">{errors.password}</p>}
             </label>
           </fieldset>
           <input type="submit" className="loginPopup__button" value="Sign in" />
