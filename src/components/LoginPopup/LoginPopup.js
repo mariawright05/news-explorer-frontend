@@ -16,14 +16,14 @@ const LoginPopup = () => {
     closeAllPopups,
   } = authContext;
 
-  const setLogin = () => login(values);
+  const loginCallback = () => login(values);
 
   const {
     values,
     onChange,
     onSubmit,
     errors,
-  } = useForm(setLogin, validate);
+  } = useForm(loginCallback, validate);
 
   const openRegister = () => {
     closeAllPopups();
