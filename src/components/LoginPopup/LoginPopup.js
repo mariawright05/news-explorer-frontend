@@ -4,7 +4,6 @@ import React, { useContext } from 'react';
 // import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 import './LoginPopup.css';
-import 'bulma/css/bulma.css';
 import useForm from '../../utils/useForm';
 import validate from './validateLogin';
 
@@ -69,36 +68,40 @@ const LoginPopup = () => {
         <form action="submit" onSubmit={onSubmit} className="loginPopup__form" noValidate>
           <h3 className="loginPopup__heading">Sign in</h3>
           <fieldset className="loginPopup__form-group">
-            <label htmlFor="email" className="loginPopup__form-label">
+            <div className="loginPopup__field-group">
               Email
-              <input
-                id="email"
-                type="email"
-                name="email"
-                className={`loginPopup__form-field ${errors.email && 'is-danger'}`}
-                label="Email"
-                placeholder="Enter email"
-                value={values.email || ''}
-                required
-                onChange={onChange}
-              />
-              {errors.email && <p className="help is-danger">{errors.email}</p>}
-            </label>
-            <label htmlFor="password" className="loginPopup__form-label">
-              Password
-              <input
-                id="password"
-                type="text"
-                name="password"
-                className={`loginPopup__form-field ${errors.password && 'is-danger'}`}
-                placeholder="Enter password"
-                value={values.password || ''}
-                required
-                minLength="6"
-                onChange={onChange}
-              />
-              {errors.password && <p className="help is-danger">{errors.password}</p>}
-            </label>
+              <label htmlFor="email" className="loginPopup__form-label">
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  className={`loginPopup__form-field ${errors.email && 'is-danger'}`}
+                  label="Email"
+                  placeholder="Enter email"
+                  value={values.email || ''}
+                  required
+                  onChange={onChange}
+                />
+                {errors.email && <p className="loginPopup__error">{errors.email}</p>}
+              </label>
+            </div>
+            <div className="loginPopup__field-group">
+              <label htmlFor="password" className="loginPopup__form-label">
+                Password
+                <input
+                  id="password"
+                  type="text"
+                  name="password"
+                  className={`loginPopup__form-field ${errors.password && 'is-danger'}`}
+                  placeholder="Enter password"
+                  value={values.password || ''}
+                  required
+                  minLength="6"
+                  onChange={onChange}
+                />
+                {errors.password && <p className="loginPopup__error">{errors.password}</p>}
+              </label>
+            </div>
           </fieldset>
           <input type="submit" className="loginPopup__button" value="Sign in" />
           <button type="button" className="loginPopup__message_link" onClick={openRegister}>
