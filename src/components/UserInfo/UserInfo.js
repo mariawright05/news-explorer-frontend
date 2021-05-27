@@ -4,11 +4,15 @@
 /* eslint-disable no-param-reassign */
 import React, { useContext } from 'react';
 import NewsContext from '../../context/news/newsContext';
+import AuthContext from '../../context/auth/authContext';
 import './UserInfo.css';
 
 const UserInfo = () => {
   const newsContext = useContext(NewsContext);
   const { savedCards } = newsContext;
+
+  const authContext = useContext(AuthContext);
+  const { username } = authContext;
 
   // Extracts keywords from objects in saved cards array
   const extractArr = savedCards.map((a) => { return a.keyword; });
@@ -50,8 +54,8 @@ const UserInfo = () => {
 
   const numArticles = () => {
     return filteredArr.length === 1
-      ? 'Elise, you have 1 saved article'
-      : `Elise, you have ${filteredArr.length} saved articles`;
+      ? `${username}, you have 1 saved article`
+      : `${username}, you have ${filteredArr.length} saved articles`;
   };
 
   return (

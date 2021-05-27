@@ -15,7 +15,7 @@ const Header = () => {
   const page = useContext(PageContext);
   const authContext = useContext(AuthContext);
   const {
-    user,
+    username,
     handleLoginOpen,
     isLoginOpen,
     isRegisterOpen,
@@ -63,7 +63,7 @@ const Header = () => {
         className={`header__nav-button ${linkColor()}`}
         onClick={logout}
       >
-        {user.name}
+        {username}
         {
           page === 'saved-news' && !isSidebarOpen ? (
             <LogoutIconAlt className="header__icon_logout" />
@@ -107,7 +107,7 @@ const Header = () => {
 
   useEffect(() => {
     handleNavLinks();
-  }, [isAuth, isRegisterOpen, isLoginOpen, isSidebarOpen]);
+  }, [isAuth, isRegisterOpen, isLoginOpen, isSuccessOpen, isSidebarOpen]);
 
   return (
     <div className="header">

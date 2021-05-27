@@ -3,6 +3,7 @@
   "CARD_DATA": "[...Array(ARRAY_LENGTH)]",
   "LIMIT": 3,
   "SEARCH_URL": "https://newsapi.org/v2/everything",
+  "DEV_AUTH_URL": "http://localhost:3000/api",
   "AUTH_URL": "https://api-news-explorer-mmw.herokuapp.com/api",
   "API_KEY": "dbaf11a9636d4ec9a2d182bc8569034c"
 }

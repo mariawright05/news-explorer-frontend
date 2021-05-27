@@ -10,21 +10,27 @@ const RegisterPopup = () => {
   const authContext = useContext(AuthContext);
   const {
     register,
+    user,
     isAuth,
+    errorMsg,
     isRegisterOpen,
     handleLoginOpen,
     handleSuccessOpen,
     closeAllPopups,
   } = authContext;
 
-  const setRegister = () => register(values);
+  // Calls register API function from authContext
+  // Used in useForm hook
+  const registerCallback = () => {
+    register(values);
+  };
 
   const {
     values,
     onChange,
     onSubmit,
     errors,
-  } = useForm(setRegister, validate);
+  } = useForm(registerCallback, validate);
 
   const openLogin = () => {
     closeAllPopups();
@@ -37,8 +43,12 @@ const RegisterPopup = () => {
   };
 
   useEffect(() => {
-    if (isAuth) openSuccess();
+    if (user && !isAuth) openSuccess();
   }, [isAuth]);
+
+  useEffect(() => {
+
+  }, [errorMsg]);
 
   return (
     <div className={`registerPopup ${isRegisterOpen ? 'registerPopup_opened' : ''}`}>
@@ -86,22 +96,23 @@ const RegisterPopup = () => {
               </label>
             </div>
             <div className="registerPopup__field-group">
-              Username
-              <label htmlFor="username" className="registerPopup__form-label">
+              Name
+              <label htmlFor="name" className="registerPopup__form-label">
                 <input
-                  id="username"
+                  id="name"
                   type="text"
-                  name="username"
-                  className={`registerPopup__form-field ${errors.username && 'registerPopup__error'}`}
-                  placeholder="Enter your username"
-                  value={values.username || ''}
+                  name="name"
+                  className={`registerPopup__form-field ${errors.name && 'registerPopup__error'}`}
+                  placeholder="Enter your name"
+                  value={values.name || ''}
                   required
                   onChange={onChange}
                 />
-                {errors.username && <p className="registerPopup__error_visible">{errors.username}</p>}
+                {errors.name && <p className="registerPopup__error_visible">{errors.name}</p>}
               </label>
             </div>
           </fieldset>
+          {errorMsg && <p className="registerPopup__errorMsg_visible">{errorMsg}</p>}
           <input type="submit" className="registerPopup__button" value="Sign up" onClick={onSubmit} />
           <button type="button" className="registerPopup__message_link" onClick={openLogin}>
             <span className="registerPopup__message">or </span>

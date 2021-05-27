@@ -10,10 +10,10 @@ const validate = (values) => {
   } else if (values.password.length < 8) {
     errors.password = 'Password needs to be at least 8 characters';
   }
-  if (!values.username) {
-    errors.username = 'Username is required';
-  } else if (values.username.length < 3) {
-    errors.username = 'Username needs to be at least 3 characters';
+  if (!values.name) {
+    errors.name = 'name is required';
+  } else if (values.name.length < 3) {
+    errors.name = 'name needs to be at least 3 characters';
   }
   return errors;
 };
