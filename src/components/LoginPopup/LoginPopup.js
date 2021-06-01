@@ -9,14 +9,14 @@ import validate from './validateLogin';
 const LoginPopup = () => {
   const authContext = useContext(AuthContext);
   const {
-    login,
-    // isAuthenticated,
+    handleLogin,
     isLoginOpen,
     handleRegisterOpen,
     closeAllPopups,
+    errorMsg,
   } = authContext;
 
-  const loginCallback = () => login(values);
+  const loginCallback = () => handleLogin(values);
 
   const {
     values,
@@ -76,6 +76,7 @@ const LoginPopup = () => {
               </label>
             </div>
           </fieldset>
+          {errorMsg && <p className="loginPopup__errorMsg_visible">{errorMsg}</p>}
           <input type="submit" className="loginPopup__button" value="Sign in" />
           <button type="button" className="loginPopup__message_link" onClick={openRegister}>
             <span className="loginPopup__message">or </span>

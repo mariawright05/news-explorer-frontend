@@ -21,13 +21,13 @@ const Card = ({ card }) => {
   const newsContext = useContext(NewsContext);
   const authContext = useContext(AuthContext);
 
-  const { setIsSaved } = newsContext;
-  const { isAuth } = authContext;
+  const { handleUpdateSave } = newsContext;
+  const { isAuth, token } = authContext;
 
   const [iconHoverShown, setIconHoverShown] = useState(false);
 
   const handleDeleteClick = () => {
-    setIsSaved(card);
+    handleUpdateSave(card, token);
   };
 
   const convertDateFormat = (p) => {
@@ -57,7 +57,8 @@ const Card = ({ card }) => {
 
   const handleSaveClick = () => {
     if (isAuth) {
-      setIsSaved(card);
+      console.log('0 - sending to handleUpdateSave with token: ', token);
+      handleUpdateSave(card, token);
     }
   };
 

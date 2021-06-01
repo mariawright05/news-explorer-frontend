@@ -1,11 +1,11 @@
+/* eslint-disable arrow-body-style */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable quote-props */
 /* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
 /* eslint-disable-next-line no-unused-expressions */
 
-import React, { useReducer } from 'react';
-// import axios from 'axios';
+import React, { useEffect, useReducer } from 'react';
 import NewsContext from './newsContext';
 import NewsReducer from './newsReducer';
 import {
@@ -18,7 +18,7 @@ import {
   SET_QUERY,
   SAVED_CARDS,
 } from '../types';
-import { SEARCH_URL, API_KEY } from '../../utils/configData.json';
+import { searchNews, updateSave } from './NewsApi';
 
 const NewsState = (props) => {
   const initialState = {
@@ -38,53 +38,36 @@ const NewsState = (props) => {
     dispatch({ type: SET_LOADING });
   };
 
-  // Adds news results to card list
-  const setSearchedNews = (res) => {
-    state.cards = [];
-    dispatch({
-      type: SEARCHED_NEWS,
-      payload: res.articles,
-    });
-  };
-
-  // Assigns searchError to true if server error
-  const setSearchError = () => {
-    dispatch({ type: SEARCH_ERROR });
-  };
-
-  // Assigns notFound to true if no news found
-  const setNotFound = () => {
-    dispatch({ type: NOT_FOUND });
-  };
-
   // Fetch news from NewsAPI
-  const searchNews = (searchTerm) => {
+  const handleSearchNews = (searchTerm) => {
     setLoading();
-    const today = new Date();
-    const lastWeek = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-    // Formats date for API request parameter requirements
-    const ISOToday = today.toISOString();
-    const ISOLastWeek = lastWeek.toISOString();
-
-    fetch(`${SEARCH_URL}?q=${searchTerm}&apiKey=${API_KEY}&from=${ISOLastWeek}&to=${ISOToday}&pageSize=${100}&sortBy=publishedAt&language=en`)
-      .then((res) => { return res.json(); })
+    searchNews(searchTerm)
       .then((res) => {
-        res.status === 'ok' && setSearchedNews(res);
+        state.cards = [];
+        dispatch({
+          type: SEARCHED_NEWS,
+          payload: res.articles,
+        });
         return res;
       })
-      .then((res) => { res.articles.length === 0 && setNotFound(); })
-      .catch(() => { setSearchError(); });
+      .then((res) => {
+        res.articles.length === 0
+          && dispatch({ type: NOT_FOUND });
+      })
+      .catch((err) => dispatch({ type: SEARCH_ERROR, payload: err.toString() }));
   };
 
   // Updates saved card list
   const setSavedCards = () => {
+    console.log('3 - in setSavedCards');
     dispatch({
       type: SAVED_CARDS,
     });
   };
 
   // Sets if isSaved is true or false and assigns keyword
-  const setIsSaved = (card) => {
+  const handleUpdateSave = (card, token) => {
+    console.log('1 - start handleupdatesave, card: ', card);
     card.isSaved
       ? dispatch({
         type: SET_NOT_SAVED,
@@ -94,7 +77,10 @@ const NewsState = (props) => {
         type: SET_SAVED,
         payload: card.url,
       });
+    console.log('2 - after dispatch');
     setSavedCards();
+    updateSave(card, token)
+      .catch((err) => dispatch({ type: SEARCH_ERROR, payload: err.toString() }));
   };
 
   // Set current query term
@@ -116,6 +102,10 @@ const NewsState = (props) => {
     }
   };
 
+  useEffect(() => {
+    console.log('saved cards: ', state.savedCards);
+  }, [state]);
+
   return (
     <NewsContext.Provider
       value={{
@@ -128,8 +118,8 @@ const NewsState = (props) => {
         keyword: state.keyword,
         savedCards: state.savedCards,
         setLoading,
-        setIsSaved,
-        searchNews,
+        handleUpdateSave,
+        handleSearchNews,
         setCardButtonType,
         setQuery,
         setSavedCards,

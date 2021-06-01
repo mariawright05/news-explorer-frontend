@@ -9,7 +9,7 @@ import validate from './validateRegister';
 const RegisterPopup = () => {
   const authContext = useContext(AuthContext);
   const {
-    register,
+    handleRegister,
     user,
     isAuth,
     errorMsg,
@@ -19,11 +19,9 @@ const RegisterPopup = () => {
     closeAllPopups,
   } = authContext;
 
-  // Calls register API function from authContext
+  // Calls handleRegister API function from authContext
   // Used in useForm hook
-  const registerCallback = () => {
-    register(values);
-  };
+  const registerCallback = () => handleRegister(values);
 
   const {
     values,
@@ -43,12 +41,10 @@ const RegisterPopup = () => {
   };
 
   useEffect(() => {
-    if (user && !isAuth) openSuccess();
-  }, [isAuth]);
-
-  useEffect(() => {
-
-  }, [errorMsg]);
+    if (user && isAuth) {
+      openSuccess();
+    }
+  }, []);
 
   return (
     <div className={`registerPopup ${isRegisterOpen ? 'registerPopup_opened' : ''}`}>

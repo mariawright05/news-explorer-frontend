@@ -3,6 +3,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { slice, concat } from 'lodash';
 import './CardList.css';
+import { v4 as uuidv4 } from 'uuid';
 import Card from '../Card/Card';
 import Preloader from '../Preloader/Preloader';
 import NothingFound from '../NothingFound/NothingFound';
@@ -31,13 +32,13 @@ const CardList = () => {
   const [index, setIndex] = useState(LIMIT);
 
   // Function to show initial cards, number determined by LIMIT
-  const showvisibleList = () => {
+  const showVisibleList = () => {
     setList(visibleList);
   };
 
   // Resets initial cards with every search
   useEffect(() => {
-    showvisibleList();
+    showVisibleList();
   }, [visibleList]);
 
   // Load More button functionality
@@ -65,7 +66,7 @@ const CardList = () => {
       {cards.length !== 0 && <h2 className="cardList__title">Search results</h2>}
       <ul className="cardList__card-wrapper">
         {list.map((card) => {
-          return <Card key={card.id} card={card} />;
+          return <Card key={uuidv4()} card={card} />;
         })}
       </ul>
       {showMore && <button type="submit" className="cardList__button" onClick={loadMore}>Show more</button>}

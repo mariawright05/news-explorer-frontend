@@ -3,32 +3,30 @@
 /* eslint-disable arrow-parens */
 /* eslint-disable no-unused-expressions */
 import React, { useReducer, useState } from 'react';
+// import { useHistory } from 'react-router-dom';
 import AuthContext from './authContext';
-import authReducer from './authReducer';
+import AuthReducer from './authReducer';
 import {
-  REGISTER_SUCCESS,
-  // REGISTER_FAIL,
   USER_LOADED,
   AUTH_ERROR,
   LOGIN_SUCCESS,
-  // LOGIN_FAIL,
   LOGOUT,
   REGISTER_FAIL,
   CLEAR_ERRORS,
   LOGIN_FAIL,
 } from '../types';
-import { DEV_AUTH_URL } from '../../utils/configData.json';
+import { loadUser, login, register } from './AuthApi';
 
 const AuthState = (props) => {
   const initialState = {
-    token: localStorage.getItem('token'),
-    isAuth: null,
-    loading: true,
-    username: null,
+    token: null,
+    isAuth: false,
     errorMsg: null,
+    user: {},
   };
 
-  const [state, dispatch] = useReducer(authReducer, initialState);
+  // const history = useHistory();
+  const [state, dispatch] = useReducer(AuthReducer, initialState);
 
   // Open/closed states for popups
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -57,121 +55,85 @@ const AuthState = (props) => {
     setIsSuccessOpen(true);
   };
 
-  // Adds fetched user to user state
-  // const setUser = (res) => {
-  //   dispatch({
-  //     type: USER_LOADED,
-  //     payload: res,
-  //   });
-  // };
-
   // Load user
-  const loadUser = () => {
-    console.log('#1 in loadUser, token: ', state.token);
-    return fetch(`${DEV_AUTH_URL}/users/me`, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'x-auth-token': state.token,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log('#2 data before reducer: ', data);
+  const handleLoadUser = () => {
+    console.log('5 - loading user');
+    const jwt = localStorage.getItem('jwt');
+    loadUser(jwt)
+      .then((res) => {
         dispatch({
           type: USER_LOADED,
-          payload: data,
+          payload: res,
         });
       })
-      .catch((err) => {
-        console.log('in the catch');
+      .catch(err => {
+        console.log('auth error');
         dispatch({
           type: AUTH_ERROR,
-          payload: err.toString(),
+          payload: err,
         });
       });
   };
 
-  // Register user
-  const register = async (formData) => {
-    try {
-      const res = await fetch(`${DEV_AUTH_URL}/signup`, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      await (
-        res.ok
-          ? res.json()
-          : res.json().then(err => Promise.reject(err))
-      );
-      dispatch({ type: REGISTER_SUCCESS });
-      closeAllPopups();
-      handleSuccessOpen();
-    } catch (err) {
-      dispatch({
-        type: REGISTER_FAIL,
-        payload: err.toString(),
-      });
-    }
-  };
-
-  const login = (formData) => {
-    console.log('a - start login');
-    return fetch(`${DEV_AUTH_URL}/signin`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        return dispatch({
-          type: LOGIN_SUCCESS,
-          payload: data,
-        });
+  // Login
+  const handleLogin = (formData) => {
+    login(formData)
+      .then((res) => {
+        res?.token
+          ? dispatch({ type: LOGIN_SUCCESS, payload: res })
+          : dispatch({ type: LOGIN_FAIL, payload: res });
+        closeAllPopups();
+        console.log('4 - after dispatching and now redirecting to main');
+        // history.push('/');
       })
-      .then(() => {
-        console.log('c - heres where loadUser should happen');
-        console.log('c2 - isAuth: ', state.isAuth);
-        loadUser();
-      })
+      .then(() => handleLoadUser())
       .catch((err) => {
-        dispatch({
-          type: LOGIN_FAIL,
-          payload: err.toString(),
-        });
+        console.log('in catch');
+        dispatch({ type: LOGIN_FAIL, payload: err.toString() });
       });
+  };
+
+  // useEffect(() => {
+  //   console.log('jwt: ', localStorage.getItem('jwt'));
+  //   console.log('token: ', state.token);
+  //   console.log('user: ', state.user);
+  //   console.log('isAuth: ', state.isAuth);
+  // }, [state]);
+
+  // Register
+  const handleRegister = (formData) => {
+    register(formData)
+      .then(() => {
+        closeAllPopups();
+        handleSuccessOpen();
+      })
+      .catch((err) => dispatch({ type: REGISTER_FAIL, payload: err.toString() }));
   };
 
   // Logout
-  const logout = () => { dispatch({ type: LOGOUT }); };
+  const handleLogout = () => dispatch({ type: LOGOUT });
+
+  // Clear errors
+  const handleClearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
   return (
     <AuthContext.Provider
       value={{
         token: state.token,
         isAuth: state.isAuth,
-        loading: state.loading,
-        username: state.username,
         errorMsg: state.errorMsg,
+        user: state.user,
+        handleLoadUser,
+        handleLogin,
+        handleRegister,
+        handleLogout,
+        handleSuccessOpen,
+        handleRegisterOpen,
+        handleLoginOpen,
+        handleClearErrors,
         isLoginOpen,
         isRegisterOpen,
         isSuccessOpen,
-        register,
-        loadUser,
-        login,
-        logout,
-        clearErrorMsg,
-        handleLoginOpen,
-        handleRegisterOpen,
-        handleSuccessOpen,
         closeAllPopups,
       }}
     >
@@ -181,3 +143,126 @@ const AuthState = (props) => {
 };
 
 export default AuthState;
+
+// Adds fetched user to user state
+// const setUser = (res) => {
+//   dispatch({
+//     type: USER_LOADED,
+//     payload: res,
+//   });
+// };
+
+//   // Load user
+//   const loadUser = () => {
+//     console.log('#1 in loadUser, token: ', state.token);
+//     return fetch(`${DEV_AUTH_URL}/users/me`, {
+//       method: 'GET',
+//       headers: {
+//         'Accept': 'application/json',
+//         'Content-Type': 'application/json',
+//         'x-auth-token': state.token,
+//       },
+//     })
+//       .then((res) => res.json())
+//       .then((data) => {
+//         console.log('#2 data before reducer: ', data);
+//         dispatch({
+//           type: USER_LOADED,
+//           payload: data,
+//         });
+//       })
+//       .catch((err) => {
+//         console.log('in the catch');
+//         dispatch({
+//           type: AUTH_ERROR,
+//           payload: err.toString(),
+//         });
+//       });
+//   };
+
+//   // Register user
+//   const register = async (formData) => {
+//     try {
+//       const res = await fetch(`${DEV_AUTH_URL}/signup`, {
+//         method: 'POST',
+//         headers: {
+//           'Accept': 'application/json',
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(formData),
+//       });
+//       await (
+//         res.ok
+//           ? res.json()
+//           : res.json().then(err => Promise.reject(err))
+//       );
+//       dispatch({ type: REGISTER_SUCCESS });
+//       closeAllPopups();
+//       handleSuccessOpen();
+//     } catch (err) {
+//       dispatch({
+//         type: REGISTER_FAIL,
+//         payload: err.toString(),
+//       });
+//     }
+//   };
+
+//   const login = (formData) => {
+//     console.log('a - start login');
+//     return fetch(`${DEV_AUTH_URL}/signin`, {
+//       method: 'POST',
+//       headers: {
+//         'Accept': 'application/json',
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(formData),
+//     })
+//       .then((res) => res.json())
+//       .then((data) => {
+//         return dispatch({
+//           type: LOGIN_SUCCESS,
+//           payload: data,
+//         });
+//       })
+//       .then(() => {
+//         console.log('c - heres where loadUser should happen');
+//         console.log('c2 - isAuth: ', state.isAuth);
+//         loadUser();
+//       })
+//       .catch((err) => {
+//         dispatch({
+//           type: LOGIN_FAIL,
+//           payload: err.toString(),
+//         });
+//       });
+//   };
+
+//   // Logout
+//   const logout = () => { dispatch({ type: LOGOUT }); };
+
+//   return (
+//     <AuthContext.Provider
+//       value={{
+//         token: state.token,
+//         isAuth: state.isAuth,
+//         loading: state.loading,
+//         username: state.username,
+//         errorMsg: state.errorMsg,
+//         isLoginOpen,
+//         isRegisterOpen,
+//         isSuccessOpen,
+//         register,
+//         loadUser,
+//         login,
+//         logout,
+//         clearErrorMsg,
+//         handleLoginOpen,
+//         handleRegisterOpen,
+//         handleSuccessOpen,
+//         closeAllPopups,
+//       }}
+//     >
+//       {props.children}
+//     </AuthContext.Provider>
+//   );
+// };

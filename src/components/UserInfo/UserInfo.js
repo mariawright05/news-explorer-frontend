@@ -12,7 +12,7 @@ const UserInfo = () => {
   const { savedCards } = newsContext;
 
   const authContext = useContext(AuthContext);
-  const { username } = authContext;
+  const { user } = authContext;
 
   // Extracts keywords from objects in saved cards array
   const extractArr = savedCards.map((a) => { return a.keyword; });
@@ -54,8 +54,8 @@ const UserInfo = () => {
 
   const numArticles = () => {
     return filteredArr.length === 1
-      ? `${username}, you have 1 saved article`
-      : `${username}, you have ${filteredArr.length} saved articles`;
+      ? `${user.name}, you have 1 saved article`
+      : `${user.name}, you have ${filteredArr.length} saved articles`;
   };
 
   return (

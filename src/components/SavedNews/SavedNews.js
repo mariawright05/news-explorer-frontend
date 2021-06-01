@@ -8,12 +8,13 @@ import AuthContext from '../../context/auth/authContext';
 
 const SavedNews = (props) => {
   const authContext = useContext(AuthContext);
-  const { isAuth } = authContext;
+  const { isAuth, handleLoadUser } = authContext;
   useEffect(() => {
+    handleLoadUser();
     if (!isAuth) {
       props.history.push('/');
     }
-  }, []);
+  }, [isAuth]);
 
   return (
     <>

@@ -9,25 +9,11 @@ import './Search.css';
 
 const Search = () => {
   const newsContext = useContext(NewsContext);
-  const { searchNews, setQuery } = newsContext;
-
-  // const [text, setText] = useState('');
-
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   searchNews(text);
-  //   setQuery(text);
-  //   setText('');
-  // };
-
-  // const onChange = (e) => {
-  //   setText(e.target.value);
-  // };
+  const { handleSearchNews, setQuery } = newsContext;
 
   const searchCallback = () => {
-    searchNews(values.query);
+    handleSearchNews(values.query);
     setQuery(values.query);
-    // console.log('in Search, values: ', values);
   };
 
   const {

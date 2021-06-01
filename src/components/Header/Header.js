@@ -15,13 +15,13 @@ const Header = () => {
   const page = useContext(PageContext);
   const authContext = useContext(AuthContext);
   const {
-    username,
+    user,
     handleLoginOpen,
     isLoginOpen,
     isRegisterOpen,
     isSuccessOpen,
     isAuth,
-    logout,
+    handleLogout,
   } = authContext;
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -61,9 +61,9 @@ const Header = () => {
       <button
         type="button"
         className={`header__nav-button ${linkColor()}`}
-        onClick={logout}
+        onClick={handleLogout}
       >
-        {username}
+        {user.name}
         {
           page === 'saved-news' && !isSidebarOpen ? (
             <LogoutIconAlt className="header__icon_logout" />
@@ -106,6 +106,7 @@ const Header = () => {
   };
 
   useEffect(() => {
+    console.log('handling nav links');
     handleNavLinks();
   }, [isAuth, isRegisterOpen, isLoginOpen, isSuccessOpen, isSidebarOpen]);
 

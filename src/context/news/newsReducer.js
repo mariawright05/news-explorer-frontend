@@ -13,6 +13,7 @@ import {
 import { LIMIT } from '../../utils/configData.json';
 
 export default (state, action) => {
+  localStorage.setItem('cards', action.payload);
   switch (action.type) {
     case SEARCHED_NEWS:
       return {
@@ -30,6 +31,7 @@ export default (state, action) => {
         notFound: false,
       };
     case SEARCH_ERROR:
+      console.log('in SEARCH_ERROR');
       return {
         ...state,
         searchError: true,
@@ -40,6 +42,7 @@ export default (state, action) => {
         notFound: true,
       };
     case SET_SAVED:
+      console.log('1.1 - in SET_SAVED');
       return {
         ...state,
         cards: state.cards.map((card) => {
