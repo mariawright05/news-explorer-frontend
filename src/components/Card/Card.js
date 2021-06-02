@@ -22,7 +22,9 @@ const Card = ({ card }) => {
   const authContext = useContext(AuthContext);
 
   const { handleUpdateSave } = newsContext;
-  const { isAuth, token } = authContext;
+  const { isAuth } = authContext;
+
+  const token = localStorage.getItem('jwt');
 
   const [iconHoverShown, setIconHoverShown] = useState(false);
 

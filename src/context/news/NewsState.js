@@ -60,6 +60,7 @@ const NewsState = (props) => {
   // Updates saved card list
   const setSavedCards = () => {
     console.log('3 - in setSavedCards');
+    // get cards from server
     dispatch({
       type: SAVED_CARDS,
     });
