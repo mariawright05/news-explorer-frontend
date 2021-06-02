@@ -38,19 +38,6 @@ const NewsState = (props) => {
     dispatch({ type: SET_LOADING });
   };
 
-  // Check to see if there are searched cards in localStorage
-  const searchedNews = JSON.parse(localStorage.getItem('searchedNews'));
-
-  useEffect(() => {
-    if (searchedNews) {
-      setLoading();
-      dispatch({
-        type: SEARCHED_NEWS,
-        payload: searchedNews,
-      });
-    }
-  }, []);
-
   // Fetch news from NewsAPI
   const handleSearchNews = (searchTerm) => {
     setLoading();
@@ -115,6 +102,21 @@ const NewsState = (props) => {
       card.cardButtonType = 'card__icon_save';
     }
   };
+
+  // Check to see if there are searched cards and query in localStorage
+  const searchedNews = JSON.parse(localStorage.getItem('searchedNews'));
+  const searchTerm = localStorage.getItem('searchTerm');
+
+  useEffect(() => {
+    if (searchedNews) {
+      setLoading();
+      dispatch({
+        type: SEARCHED_NEWS,
+        payload: searchedNews,
+      });
+      setQuery(searchTerm);
+    }
+  }, []);
 
   return (
     <NewsContext.Provider

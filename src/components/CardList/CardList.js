@@ -51,14 +51,6 @@ const CardList = () => {
     setShowMore(newShowMore);
   };
 
-  // useEffect(() => {
-  //   if (searchedNews) {
-  //     cards.state = searchedNews;
-  //     console.log('searchedNews in cardlist: ', cards.state);
-  //     loadMore();
-  //   }
-  // }, []);
-
   useEffect(() => {
     if (cards.length !== 0) {
       loadMore();

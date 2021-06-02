@@ -63,7 +63,7 @@ export default (state, action) => {
         }),
       };
     case SET_QUERY:
-      localStorage.setItem('query', action.payload);
+      localStorage.setItem('searchTerm', action.payload);
       return {
         ...state,
         query: action.payload,

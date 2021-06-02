@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Header from '../Header/Header';
 import NewsContext from '../../context/news/newsContext';
 import useForm from '../../utils/useForm';
@@ -22,6 +22,14 @@ const Search = () => {
     onSubmit,
     errors,
   } = useForm(searchCallback, validate);
+
+  const searchTerm = localStorage.getItem('searchTerm');
+
+  useEffect(() => {
+    if (searchTerm) {
+      values.query = searchTerm;
+    }
+  }, []);
 
   return (
     <div className="search">
