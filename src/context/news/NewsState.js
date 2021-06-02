@@ -65,7 +65,8 @@ const NewsState = (props) => {
           type: SAVED_CARDS,
           payload: res,
         });
-      });
+      })
+      .catch((err) => dispatch({ type: SEARCH_ERROR, payload: err.toString() }));
   };
 
   // Sets if isSaved is true or false and assigns keyword
@@ -79,9 +80,9 @@ const NewsState = (props) => {
         type: SET_SAVED,
         payload: card.url,
       });
-    handleSavedCards(token);
     updateSave(card, token)
       .catch((err) => dispatch({ type: SEARCH_ERROR, payload: err.toString() }));
+    handleSavedCards(token);
   };
 
   // Set current query term

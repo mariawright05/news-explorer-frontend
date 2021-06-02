@@ -22,6 +22,7 @@ const CardList = () => {
     searchError,
     notFound,
     savedCards,
+    handleSavedCards,
   } = newsContext;
 
   // Determines if there are any more cards to show up to ARRAY_LENGTH
@@ -35,6 +36,13 @@ const CardList = () => {
   const showVisibleList = () => {
     setList(visibleList);
   };
+
+  const token = localStorage.getItem('jwt');
+  useEffect(() => {
+    if (token) {
+      handleSavedCards(token);
+    }
+  }, [token]);
 
   // Resets initial cards with every search
   useEffect(() => {
@@ -51,6 +59,7 @@ const CardList = () => {
     setShowMore(newShowMore);
   };
 
+  // Check on page load to see if cards have been set from localStorage
   useEffect(() => {
     if (cards.length !== 0) {
       loadMore();
@@ -84,7 +93,7 @@ const CardList = () => {
     <>
       <ul className="cardList__card-wrapper">
         {savedCards.map((card) => {
-          return <Card key={card.id} card={card} />;
+          return <Card key={uuidv4()} card={card} />;
         })}
       </ul>
     </>

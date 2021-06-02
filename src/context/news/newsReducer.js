@@ -16,7 +16,6 @@ export default (state, action) => {
   switch (action.type) {
     case SEARCHED_NEWS:
       localStorage.setItem('searchedNews', JSON.stringify(action.payload));
-      console.log('action.payload ', action.payload);
       return {
         ...state,
         cards: action.payload,
@@ -69,11 +68,13 @@ export default (state, action) => {
         query: action.payload,
       };
     case SAVED_CARDS:
+      console.log('SAVED_CARDS action.payload: ', action.payload);
       return {
         ...state,
-        savedCards: state.cards.filter((card) => {
-          return card.isSaved === true;
-        }),
+        savedCards: action.payload,
+        // savedCards: state.cards.filter((card) => {
+        //   return card.isSaved === true;
+        // }),
       };
     default:
       return state;
