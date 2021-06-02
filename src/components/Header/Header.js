@@ -106,7 +106,6 @@ const Header = () => {
   };
 
   useEffect(() => {
-    console.log('handling nav links');
     handleNavLinks();
   }, [isAuth, isRegisterOpen, isLoginOpen, isSuccessOpen, isSidebarOpen]);
 

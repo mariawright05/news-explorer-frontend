@@ -18,7 +18,7 @@ import {
   SET_QUERY,
   SAVED_CARDS,
 } from '../types';
-import { searchNews, updateSave } from './NewsApi';
+import { searchNews, updateSave, getSavedCards } from './NewsApi';
 
 const NewsState = (props) => {
   const initialState = {
@@ -37,6 +37,19 @@ const NewsState = (props) => {
   const setLoading = () => {
     dispatch({ type: SET_LOADING });
   };
+
+  // Check to see if there are searched cards in localStorage
+  const searchedNews = JSON.parse(localStorage.getItem('searchedNews'));
+
+  useEffect(() => {
+    if (searchedNews) {
+      setLoading();
+      dispatch({
+        type: SEARCHED_NEWS,
+        payload: searchedNews,
+      });
+    }
+  }, []);
 
   // Fetch news from NewsAPI
   const handleSearchNews = (searchTerm) => {
@@ -58,17 +71,18 @@ const NewsState = (props) => {
   };
 
   // Updates saved card list
-  const setSavedCards = () => {
-    console.log('3 - in setSavedCards');
-    // get cards from server
-    dispatch({
-      type: SAVED_CARDS,
-    });
+  const handleSavedCards = (token) => {
+    getSavedCards(token)
+      .then((res) => {
+        dispatch({
+          type: SAVED_CARDS,
+          payload: res,
+        });
+      });
   };
 
   // Sets if isSaved is true or false and assigns keyword
   const handleUpdateSave = (card, token) => {
-    console.log('1 - start handleupdatesave, card: ', card);
     card.isSaved
       ? dispatch({
         type: SET_NOT_SAVED,
@@ -78,8 +92,7 @@ const NewsState = (props) => {
         type: SET_SAVED,
         payload: card.url,
       });
-    console.log('2 - after dispatch');
-    setSavedCards();
+    handleSavedCards(token);
     updateSave(card, token)
       .catch((err) => dispatch({ type: SEARCH_ERROR, payload: err.toString() }));
   };
@@ -103,10 +116,6 @@ const NewsState = (props) => {
     }
   };
 
-  useEffect(() => {
-    console.log('saved cards: ', state.savedCards);
-  }, [state]);
-
   return (
     <NewsContext.Provider
       value={{
@@ -123,7 +132,7 @@ const NewsState = (props) => {
         handleSearchNews,
         setCardButtonType,
         setQuery,
-        setSavedCards,
+        handleSavedCards,
       }}
     >
       {props.children}

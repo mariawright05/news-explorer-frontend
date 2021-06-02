@@ -13,9 +13,10 @@ import {
 import { LIMIT } from '../../utils/configData.json';
 
 export default (state, action) => {
-  localStorage.setItem('cards', action.payload);
   switch (action.type) {
     case SEARCHED_NEWS:
+      localStorage.setItem('searchedNews', JSON.stringify(action.payload));
+      console.log('action.payload ', action.payload);
       return {
         ...state,
         cards: action.payload,
@@ -31,7 +32,6 @@ export default (state, action) => {
         notFound: false,
       };
     case SEARCH_ERROR:
-      console.log('in SEARCH_ERROR');
       return {
         ...state,
         searchError: true,
@@ -42,7 +42,6 @@ export default (state, action) => {
         notFound: true,
       };
     case SET_SAVED:
-      console.log('1.1 - in SET_SAVED');
       return {
         ...state,
         cards: state.cards.map((card) => {
@@ -64,6 +63,7 @@ export default (state, action) => {
         }),
       };
     case SET_QUERY:
+      localStorage.setItem('query', action.payload);
       return {
         ...state,
         query: action.payload,

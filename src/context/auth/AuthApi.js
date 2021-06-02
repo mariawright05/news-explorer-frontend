@@ -7,7 +7,6 @@
 import { DEV_AUTH_URL } from '../../utils/configData.json';
 
 export const loadUser = (token) => {
-  console.log('in loadUser, token = ', token);
   return fetch(`${DEV_AUTH_URL}/users/me`, {
     method: 'GET',
     headers: {
@@ -17,7 +16,6 @@ export const loadUser = (token) => {
     },
   })
     .then((res) => {
-      console.log('#2 - in loadUser, res: ', Boolean(res.ok));
       return res.ok
         ? res.json()
         : res.json().then(err => PromiseRejectionEvent.reject(err));
@@ -26,7 +24,6 @@ export const loadUser = (token) => {
 };
 
 export const login = ({ email, password }) => {
-  console.log('1 - just hit submit, formData entered: ', email, password);
   return fetch(`${DEV_AUTH_URL}/signin`, {
     method: 'POST',
     headers: {
@@ -39,7 +36,6 @@ export const login = ({ email, password }) => {
     }),
   })
     .then((res) => {
-      console.log('2 - sent through fetch, res: ,', res);
       return res.ok
         ? res.json()
         : res.json().then((err) => { throw new Error(err); });

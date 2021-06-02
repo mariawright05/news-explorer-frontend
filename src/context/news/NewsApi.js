@@ -19,7 +19,6 @@ export const searchNews = (searchTerm) => {
 };
 
 export const updateSave = (card, token) => {
-  console.log('4 - about to fetch, token: ', token);
   return fetch(`${DEV_AUTH_URL}/articles`, {
     method: card.isSaved ? 'POST' : 'DELETE',
     headers: {
@@ -38,7 +37,21 @@ export const updateSave = (card, token) => {
     }),
   })
     .then((res) => {
-      console.log('5 - sent to server, res: ', res);
+      return res.ok
+        ? res.json()
+        : res.json().then((err) => { throw new Error(err); });
+    });
+};
+
+export const getSavedCards = (token) => {
+  return fetch(`${DEV_AUTH_URL}/articles`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-token': `${token}`,
+    },
+  })
+    .then((res) => {
       return res.ok
         ? res.json()
         : res.json().then((err) => { throw new Error(err); });

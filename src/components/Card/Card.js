@@ -59,7 +59,6 @@ const Card = ({ card }) => {
 
   const handleSaveClick = () => {
     if (isAuth) {
-      console.log('0 - sending to handleUpdateSave with token: ', token);
       handleUpdateSave(card, token);
     }
   };
