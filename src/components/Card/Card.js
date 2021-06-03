@@ -71,6 +71,7 @@ const Card = ({ card }) => {
 
   return (
     <li className="card">
+      {console.log('card: ', card)}
       <img className="card__image" src={urlToImage} alt={title} />
       <button
         type="button"

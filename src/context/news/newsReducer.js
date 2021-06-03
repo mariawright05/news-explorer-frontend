@@ -71,7 +71,21 @@ export default (state, action) => {
     case SAVED_CARDS:
       return {
         ...state,
-        savedCards: action.payload,
+        savedCards: action.payload.map((card) => {
+          if (card) {
+            const newCard = {};
+            newCard._id = card._id;
+            newCard.url = card.url;
+            newCard.title = card.title;
+            newCard.isSaved = card.isSaved;
+            newCard.description = card.text;
+            newCard.publishedAt = card.date;
+            newCard.source = card.source;
+            newCard.urlToImage = card.image;
+            return newCard;
+          }
+          return card;
+        }),
       };
     case CLEAR_NEWS:
       localStorage.removeItem('searchTerm');
