@@ -1,12 +1,18 @@
 /* eslint-disable arrow-body-style */
 // /* eslint-disable no-unused-expressions */
 
-import React, { useEffect, useReducer, useState } from 'react';
+import React, {
+  useEffect,
+  useContext,
+  useReducer,
+  useState,
+} from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { slice, concat } from 'lodash';
 import Card from '../../components/Card/Card';
 import NewsContext from './newsContext';
 import NewsReducer from './newsReducer';
+import AuthContext from '../auth/authContext';
 import {
   SEARCHED_NEWS,
   SET_LOADING,
@@ -16,6 +22,7 @@ import {
   SEARCH_ERROR,
   SET_QUERY,
   SAVED_CARDS,
+  CLEAR_NEWS,
 } from '../types';
 import { searchNews, updateSave, getSavedCards } from './NewsApi';
 import { ARRAY_LENGTH, LIMIT } from '../../utils/configData.json';
@@ -33,6 +40,9 @@ const NewsState = (props) => {
   };
 
   const [state, dispatch] = useReducer(NewsReducer, initialState);
+
+  const authState = useContext(AuthContext);
+  const { isAuth } = authState;
 
   // Set Loading
   const setLoading = () => {
@@ -193,8 +203,10 @@ const NewsState = (props) => {
         payload: searchedNews,
       });
       setQuery(searchTerm);
+    } else {
+      dispatch({ type: CLEAR_NEWS });
     }
-  }, []);
+  }, [isAuth]);
 
   return (
     <NewsContext.Provider

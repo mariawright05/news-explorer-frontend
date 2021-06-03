@@ -2,6 +2,7 @@
 import React, { useContext, useEffect } from 'react';
 import Header from '../Header/Header';
 import NewsContext from '../../context/news/newsContext';
+import AuthContext from '../../context/auth/authContext';
 import useForm from '../../utils/useForm';
 import validate from './validateSearch';
 
@@ -10,6 +11,9 @@ import './Search.css';
 const Search = () => {
   const newsContext = useContext(NewsContext);
   const { handleSearchNews, setQuery } = newsContext;
+
+  const authContext = useContext(AuthContext);
+  const { isAuth } = authContext;
 
   const searchCallback = () => {
     handleSearchNews(values.query);
@@ -29,7 +33,8 @@ const Search = () => {
     if (searchTerm) {
       values.query = searchTerm;
     }
-  }, []);
+    values.query = '';
+  }, [isAuth]);
 
   return (
     <div className="search">

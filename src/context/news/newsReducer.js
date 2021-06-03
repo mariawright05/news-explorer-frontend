@@ -9,6 +9,7 @@ import {
   NOT_FOUND,
   SET_QUERY,
   SAVED_CARDS,
+  CLEAR_NEWS,
 } from '../types';
 import { LIMIT } from '../../utils/configData.json';
 
@@ -68,10 +69,15 @@ export default (state, action) => {
         query: action.payload,
       };
     case SAVED_CARDS:
-      console.log('SAVED_CARDS action.payload: ', action.payload);
       return {
         ...state,
         savedCards: action.payload,
+      };
+    case CLEAR_NEWS:
+      return {
+        ...state,
+        cards: [],
+        query: null,
       };
     default:
       return state;

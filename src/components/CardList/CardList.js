@@ -109,7 +109,7 @@ const CardList = () => {
   // );
 
   return (
-    <div className={cards.length === 0 ? 'cardList_hidden' : 'cardList'}>
+    <div className={cards.length !== 0 ? 'cardList' : 'cardList_hidden'}>
       <div className="cardList__section-wrapper">
         {page === 'home' ? searchedList : savedList}
       </div>
