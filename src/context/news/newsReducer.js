@@ -72,9 +72,6 @@ export default (state, action) => {
       return {
         ...state,
         savedCards: action.payload,
-        // savedCards: state.cards.filter((card) => {
-        //   return card.isSaved === true;
-        // }),
       };
     default:
       return state;

@@ -54,6 +54,8 @@ export default (state, action) => {
       };
     case LOGOUT:
       localStorage.removeItem('jwt');
+      localStorage.removeItem('searchTerm');
+      localStorage.removeItem('searchedNews');
       return {
         ...state,
         token: null,

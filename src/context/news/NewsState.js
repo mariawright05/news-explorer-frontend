@@ -29,6 +29,7 @@ const NewsState = (props) => {
     searchError: false,
     notFound: false,
     savedCards: [],
+    query: null,
   };
 
   const [state, dispatch] = useReducer(NewsReducer, initialState);
@@ -130,6 +131,7 @@ const NewsState = (props) => {
         notFound: state.notFound,
         keyword: state.keyword,
         savedCards: state.savedCards,
+        query: state.query,
         setLoading,
         handleUpdateSave,
         handleSearchNews,
