@@ -32,8 +32,9 @@ const Search = () => {
   useEffect(() => {
     if (searchTerm) {
       values.query = searchTerm;
+    } else {
+      values.query = '';
     }
-    values.query = '';
   }, [isAuth]);
 
   return (

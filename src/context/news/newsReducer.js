@@ -74,10 +74,10 @@ export default (state, action) => {
         savedCards: action.payload,
       };
     case CLEAR_NEWS:
+      localStorage.removeItem('searchTerm');
       return {
         ...state,
         cards: [],
-        query: null,
       };
     default:
       return state;
