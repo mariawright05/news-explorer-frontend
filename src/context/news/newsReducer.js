@@ -82,6 +82,7 @@ export default (state, action) => {
             newCard.publishedAt = card.date;
             newCard.source = card.source;
             newCard.urlToImage = card.image;
+            newCard.keyword = card.keyword;
             return newCard;
           }
           return card;
