@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-// /* eslint-disable consistent-return */
 import React, { useContext, useState, useEffect } from 'react';
 import { slice, concat } from 'lodash';
 import './CardList.css';
@@ -29,7 +28,7 @@ const CardList = () => {
     savedList,
   } = newsContext;
 
-  const { token } = authContext;
+  // const { token } = authContext;
 
   // // Determines if there are any more cards to show up to ARRAY_LENGTH
   // const [showMore, setShowMore] = useState(true);
@@ -43,12 +42,12 @@ const CardList = () => {
   //   setList(visibleList);
   // };
 
-  // const token = localStorage.getItem('jwt');
-  // useEffect(() => {
-  //   if (token) {
-  //     handleSavedCards(token);
-  //   }
-  // }, []);
+  const token = localStorage.getItem('jwt');
+  useEffect(() => {
+    if (token) {
+      handleSavedCards(token);
+    }
+  }, []);
 
   // // Resets initial cards with every search
   // useEffect(() => {

@@ -107,7 +107,6 @@ const NewsState = (props) => {
         });
         return res;
       })
-      // eslint-disable-next-line consistent-return
       .then((res) => {
         if (res.articles.length !== 0) {
           return searchedList;
@@ -115,22 +114,21 @@ const NewsState = (props) => {
         if (res.articles.length === 0) {
           dispatch({ type: NOT_FOUND });
         }
+        return null;
       })
       .catch((err) => dispatch({ type: SEARCH_ERROR, payload: err.toString() }));
   };
 
   // Displays cards on the saved page
-  const savedList = (savedCards) => {
-    return (
-      <>
-        <ul className="cardList__card-wrapper">
-          {savedCards.map((card) => {
-            return <Card key={uuidv4()} card={card} />;
-          })}
-        </ul>
-      </>
-    );
-  };
+  const savedList = (
+    <>
+      <ul className="cardList__card-wrapper">
+        {state.savedCards.map((card) => {
+          return <Card key={uuidv4()} card={card} />;
+        })}
+      </ul>
+    </>
+  );
 
   // Updates saved card list
   const handleSavedCards = (token) => {
@@ -140,22 +138,19 @@ const NewsState = (props) => {
           type: SAVED_CARDS,
           payload: res,
         });
-        savedList(res);
+        return res;
+      })
+      .then((res) => {
+        if (res.length !== 0) {
+          return savedList;
+        }
+        return null;
       })
       .catch((err) => dispatch({ type: SEARCH_ERROR, payload: err.toString() }));
   };
 
   // Sets if isSaved is true or false and assigns keyword
   const handleUpdateSave = (card, token) => {
-    // card.isSaved
-    // ? dispatch({
-    //   type: SET_NOT_SAVED,
-    //   payload: card.url,
-    // })
-    // : dispatch({
-    //   type: SET_SAVED,
-    //   payload: card.url,
-    // });
     if (card.isSaved) {
       dispatch({
         type: SET_NOT_SAVED,
