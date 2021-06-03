@@ -1,6 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable no-useless-return */
-/* eslint-disable no-else-return */
 /* eslint-disable quote-props */
 /* eslint-disable arrow-parens */
 /* eslint-disable arrow-body-style */

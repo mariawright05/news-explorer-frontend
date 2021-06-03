@@ -3,7 +3,6 @@
 /* eslint-disable arrow-parens */
 /* eslint-disable no-unused-expressions */
 import React, { useReducer, useState } from 'react';
-// import { useHistory } from 'react-router-dom';
 import AuthContext from './authContext';
 import AuthReducer from './authReducer';
 import {
@@ -36,6 +35,7 @@ const AuthState = (props) => {
   // Clear error message
   const clearErrorMsg = () => dispatch({ type: CLEAR_ERRORS });
 
+  // Controls when popups are open or closed
   const closeAllPopups = () => {
     setIsLoginOpen(false);
     setIsRegisterOpen(false);
@@ -60,10 +60,12 @@ const AuthState = (props) => {
     const jwt = localStorage.getItem('jwt');
     loadUser(jwt)
       .then((res) => {
+        const token = localStorage.getItem('jwt');
         dispatch({
           type: USER_LOADED,
-          payload: res,
+          payload: { res, token },
         });
+        state.token = jwt;
       })
       .catch(err => {
         dispatch({
@@ -104,6 +106,17 @@ const AuthState = (props) => {
 
   // Clear errors
   const handleClearErrors = () => dispatch({ type: CLEAR_ERRORS });
+
+  // const handleTokenCheck = () => {
+  //   const jwt = localStorage.getItem('jwt');
+  //   handleLoadUser(jwt);
+  // };
+
+  // useEffect(() => {
+  //   if (state.isAuth) {
+  //     handleTokenCheck();
+  //   }
+  // }, []);
 
   return (
     <AuthContext.Provider

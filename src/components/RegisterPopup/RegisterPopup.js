@@ -80,7 +80,7 @@ const RegisterPopup = () => {
               <label htmlFor="password" className="registerPopup__form-label">
                 <input
                   id="password"
-                  type="text"
+                  type="password"
                   name="password"
                   className={`registerPopup__form-field ${errors.password && 'registerPopup__error'}`}
                   placeholder="Enter password"

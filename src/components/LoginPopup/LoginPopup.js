@@ -64,7 +64,7 @@ const LoginPopup = () => {
                 Password
                 <input
                   id="password"
-                  type="text"
+                  type="password"
                   name="password"
                   className={`loginPopup__form-field ${errors.password && 'loginPopup__error'}`}
                   placeholder="Enter password"

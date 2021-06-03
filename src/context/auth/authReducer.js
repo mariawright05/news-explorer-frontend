@@ -14,13 +14,15 @@ export default (state, action) => {
     case USER_LOADED:
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.res,
         isAuth: true,
+        token: action.payload.token,
       };
     case LOGIN_SUCCESS:
       localStorage.setItem('jwt', action.payload.token);
       return {
         ...state,
+        ...action.payload,
         token: action.payload.token,
       };
     case AUTH_ERROR:
