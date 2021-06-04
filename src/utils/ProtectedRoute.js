@@ -2,17 +2,20 @@ import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import AuthContext from '../context/auth/authContext';
 
-const ProtectedRoute = ({ component: Component, ...props }) => {
+const ProtectedRoute = ({ component: Component }) => {
   const authContext = useContext(AuthContext);
-  const { isAuth } = authContext;
+  const { handleLoginOpen } = authContext;
+
+  const token = localStorage.getItem('jwt');
 
   return (
     <Route>
       {() => {
-        return isAuth
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          ? <Component {...props} />
-          : <Redirect to="/" />;
+        if (token) {
+          return <Component />;
+        }
+        handleLoginOpen();
+        return <Redirect to="/" />;
       }}
     </Route>
   );

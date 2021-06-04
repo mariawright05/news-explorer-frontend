@@ -1,5 +1,4 @@
 /* eslint-disable arrow-body-style */
-// /* eslint-disable no-unused-expressions */
 
 import React, {
   useEffect,

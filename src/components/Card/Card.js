@@ -22,7 +22,7 @@ const Card = ({ card }) => {
   const authContext = useContext(AuthContext);
 
   const { handleUpdateSave } = newsContext;
-  const { isAuth } = authContext;
+  const { isAuth, handleRegisterOpen } = authContext;
 
   const token = localStorage.getItem('jwt');
 
@@ -61,6 +61,7 @@ const Card = ({ card }) => {
     if (isAuth) {
       handleUpdateSave(card, token);
     }
+    handleRegisterOpen();
   };
 
   const handleSaveHover = () => {
@@ -71,7 +72,6 @@ const Card = ({ card }) => {
 
   return (
     <li className="card">
-      {console.log('card: ', card)}
       <img className="card__image" src={urlToImage} alt={title} />
       <button
         type="button"

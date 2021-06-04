@@ -83,7 +83,6 @@ const AuthState = (props) => {
           ? dispatch({ type: LOGIN_SUCCESS, payload: res })
           : dispatch({ type: LOGIN_FAIL, payload: res });
         closeAllPopups();
-        // history.push('/');
       })
       .then(() => handleLoadUser())
       .catch((err) => {
@@ -106,17 +105,6 @@ const AuthState = (props) => {
 
   // Clear errors
   const handleClearErrors = () => dispatch({ type: CLEAR_ERRORS });
-
-  // const handleTokenCheck = () => {
-  //   const jwt = localStorage.getItem('jwt');
-  //   handleLoadUser(jwt);
-  // };
-
-  // useEffect(() => {
-  //   if (state.isAuth) {
-  //     handleTokenCheck();
-  //   }
-  // }, []);
 
   return (
     <AuthContext.Provider
