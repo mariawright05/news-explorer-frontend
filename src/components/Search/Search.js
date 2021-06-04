@@ -30,7 +30,7 @@ const Search = () => {
   const searchTerm = localStorage.getItem('searchTerm');
 
   useEffect(() => {
-    if (searchTerm) {
+    if (searchTerm && isAuth) {
       values.query = searchTerm;
     } else {
       values.query = '';

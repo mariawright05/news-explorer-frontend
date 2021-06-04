@@ -14,6 +14,9 @@ const Main = () => {
   useEffect(() => {
     if (jwt) {
       handleLoadUser();
+    } else {
+      localStorage.removeItem('searchTerm');
+      localStorage.removeItem('searchedNews');
     }
   }, []);
 

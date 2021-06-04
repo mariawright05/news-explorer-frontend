@@ -190,7 +190,7 @@ const NewsState = (props) => {
   const searchTerm = localStorage.getItem('searchTerm');
 
   useEffect(() => {
-    if (searchedNews) {
+    if (searchedNews && isAuth) {
       setLoading();
       dispatch({
         type: SEARCHED_NEWS,
