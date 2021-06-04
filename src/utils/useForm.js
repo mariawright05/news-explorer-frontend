@@ -22,6 +22,7 @@ const useForm = (callback, validate) => {
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
+    setErrors(validate(values));
   };
 
   return {

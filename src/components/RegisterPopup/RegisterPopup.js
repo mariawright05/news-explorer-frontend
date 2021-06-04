@@ -109,7 +109,7 @@ const RegisterPopup = () => {
             </div>
           </fieldset>
           {errorMsg && <p className="registerPopup__errorMsg_visible">{errorMsg}</p>}
-          <input type="submit" className="registerPopup__button" value="Sign up" onClick={onSubmit} />
+          <input type="submit" disabled={Object.keys(errors).length !== 0} className="registerPopup__button" value="Sign up" onClick={onSubmit} />
           <button type="button" className="registerPopup__message_link" onClick={openLogin}>
             <span className="registerPopup__message">or </span>
             Sign in
