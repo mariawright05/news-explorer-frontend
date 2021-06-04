@@ -83,7 +83,7 @@ export default (state, action) => {
             newCard.source = card.source;
             newCard.urlToImage = card.image;
             newCard.keyword = card.keyword;
-            return newCard;
+            card = newCard;
           }
           return card;
         }),

@@ -95,7 +95,7 @@ const Card = ({ card }) => {
         <p className="card__pubDate">{convertDateFormat(publishedAt)}</p>
         <h3 className="card__title">{title}</h3>
         <p className="card__description">{description}</p>
-        <p className="card__source">{source.name}</p>
+        <p className="card__source">{page === 'saved-news' ? source : source.name}</p>
       </a>
     </li>
   );
