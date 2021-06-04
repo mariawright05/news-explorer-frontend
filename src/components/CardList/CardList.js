@@ -37,7 +37,7 @@ const CardList = () => {
   }
 
   return (
-    <div className={cards.length !== 0 || savedCards.length !== 0 ? 'cardList' : 'cardList_hidden'}>
+    <div className={(cards.length !== 0 && page === 'home') || (savedCards.length !== 0 && page === 'saved-news') ? 'cardList' : 'cardList_hidden'}>
       <div className="cardList__section-wrapper">
         {page === 'home' ? searchedList : savedList}
       </div>

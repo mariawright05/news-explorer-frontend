@@ -115,10 +115,8 @@ const NewsState = (props) => {
         if (res.articles.length !== 0) {
           return searchedList;
         }
-        if (res.articles.length === 0) {
-          dispatch({ type: NOT_FOUND });
-        }
-        return null;
+        dispatch({ type: NOT_FOUND });
+        return [];
       })
       .catch((err) => dispatch({ type: SEARCH_ERROR, payload: err.toString() }));
   };

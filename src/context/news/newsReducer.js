@@ -89,7 +89,7 @@ export default (state, action) => {
         }),
       };
     case CLEAR_NEWS:
-      localStorage.removeItem('searchTerm');
+      // localStorage.removeItem('searchTerm');
       return {
         ...state,
         cards: [],

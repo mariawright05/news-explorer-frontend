@@ -22,6 +22,7 @@ const Header = () => {
     isSuccessOpen,
     isAuth,
     handleLogout,
+    handleLoadUser,
   } = authContext;
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -108,6 +109,13 @@ const Header = () => {
   useEffect(() => {
     handleNavLinks();
   }, [isAuth, isRegisterOpen, isLoginOpen, isSuccessOpen, isSidebarOpen]);
+
+  const token = localStorage.getItem('jwt');
+  useEffect(() => {
+    if (token) {
+      handleLoadUser();
+    }
+  }, []);
 
   return (
     <div className="header">
