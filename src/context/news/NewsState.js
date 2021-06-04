@@ -12,6 +12,7 @@ import Card from '../../components/Card/Card';
 import NewsContext from './newsContext';
 import NewsReducer from './newsReducer';
 import AuthContext from '../auth/authContext';
+import PageContext from '../page/PageContext';
 import {
   SEARCHED_NEWS,
   SET_LOADING,
@@ -47,6 +48,8 @@ const NewsState = (props) => {
 
   const authState = useContext(AuthContext);
   const { isAuth } = authState;
+
+  const page = useContext(PageContext);
 
   // Set Loading
   const setLoading = () => {
@@ -158,8 +161,10 @@ const NewsState = (props) => {
         type: SET_NOT_SAVED,
         payload: card.url,
       });
-      await deleteCard(card, token)
-        .catch((err) => dispatch({ type: SEARCH_ERROR, payload: err.toString() }));
+      if (page !== 'home') {
+        await deleteCard(card, token)
+          .catch((err) => dispatch({ type: SEARCH_ERROR, payload: err.toString() }));
+      }
     } else {
       await dispatch({
         type: SET_SAVED,
@@ -180,8 +185,8 @@ const NewsState = (props) => {
   };
 
   // Set card button type depending on card state or page
-  const setCardButtonType = (card, page) => {
-    if (page === 'saved-news') {
+  const setCardButtonType = (card, currentPage) => {
+    if (currentPage === 'saved-news') {
       state.card.cardButtonType = 'card__icon_trash';
     } else if (card.isSaved) {
       state.card.cardButtonType = 'card__icon_save_true';

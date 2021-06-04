@@ -48,7 +48,7 @@ export const saveCard = (card, token) => {
       title: card.title,
       text: card.description,
       date: card.publishedAt,
-      source: card.source,
+      source: card.source.name,
       url: card.url,
       image: card.urlToImage,
       owner: token,
