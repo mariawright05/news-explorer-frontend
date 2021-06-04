@@ -2,6 +2,7 @@
 /* eslint-disable arrow-parens */
 import { SEARCH_URL, API_KEY, DEV_AUTH_URL } from '../../utils/configData.json';
 
+// Search the news API for articles with searchterm in last 7 days
 export const searchNews = (searchTerm) => {
   const today = new Date();
   const lastWeek = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
@@ -18,9 +19,26 @@ export const searchNews = (searchTerm) => {
     .then(data => data);
 };
 
-export const updateSave = (card, token) => {
+// Delete card from user's saved articles
+export const deleteCard = (card, token) => {
+  return fetch(`${DEV_AUTH_URL}/articles/${card._id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-token': `${token}`,
+    },
+  })
+    .then((res) => {
+      return res.ok
+        ? res.json()
+        : res.json().then((err) => { throw new Error(err); });
+    });
+};
+
+// Add card to user's saved articles
+export const saveCard = (card, token) => {
   return fetch(`${DEV_AUTH_URL}/articles`, {
-    method: card.isSaved ? 'POST' : 'DELETE',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'x-auth-token': `${token}`,
@@ -43,6 +61,7 @@ export const updateSave = (card, token) => {
     });
 };
 
+// Retrieve a user's saved cards
 export const getSavedCards = (token) => {
   return fetch(`${DEV_AUTH_URL}/articles`, {
     method: 'GET',

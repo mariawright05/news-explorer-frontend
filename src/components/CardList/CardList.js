@@ -17,6 +17,7 @@ const CardList = () => {
     // handleSavedCards,
     searchedList,
     savedList,
+    savedCards,
   } = newsContext;
 
   // const token = localStorage.getItem('jwt');
@@ -36,7 +37,7 @@ const CardList = () => {
   }
 
   return (
-    <div className={cards.length !== 0 ? 'cardList' : 'cardList_hidden'}>
+    <div className={cards.length !== 0 || savedCards.length !== 0 ? 'cardList' : 'cardList_hidden'}>
       <div className="cardList__section-wrapper">
         {page === 'home' ? searchedList : savedList}
       </div>

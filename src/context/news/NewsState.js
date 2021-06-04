@@ -23,7 +23,12 @@ import {
   SAVED_CARDS,
   CLEAR_NEWS,
 } from '../types';
-import { searchNews, updateSave, getSavedCards } from './NewsApi';
+import {
+  searchNews,
+  saveCard,
+  getSavedCards,
+  deleteCard,
+} from './NewsApi';
 import { ARRAY_LENGTH, LIMIT } from '../../utils/configData.json';
 
 const NewsState = (props) => {
@@ -149,21 +154,23 @@ const NewsState = (props) => {
   };
 
   // Sets if isSaved is true or false and assigns keyword
-  const handleUpdateSave = (card, token) => {
+  const handleUpdateSave = async (card, token) => {
     if (card.isSaved) {
-      dispatch({
+      await dispatch({
         type: SET_NOT_SAVED,
         payload: card.url,
       });
+      await deleteCard(card, token)
+        .catch((err) => dispatch({ type: SEARCH_ERROR, payload: err.toString() }));
     } else {
-      dispatch({
+      await dispatch({
         type: SET_SAVED,
         payload: card.url,
       });
+      await saveCard(card, token)
+        .catch((err) => dispatch({ type: SEARCH_ERROR, payload: err.toString() }));
     }
-    updateSave(card, token)
-      .catch((err) => dispatch({ type: SEARCH_ERROR, payload: err.toString() }));
-    handleSavedCards(token);
+    await handleSavedCards(token);
   };
 
   // Set current query term
