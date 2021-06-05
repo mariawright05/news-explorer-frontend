@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 /* eslint-disable no-param-reassign */
 import { slice } from 'lodash';
 import {
@@ -45,9 +46,8 @@ export default (state, action) => {
       return {
         ...state,
         cards: state.cards.map((card) => {
-          if (card.url === action.payload) {
-            card.isSaved = true;
-            card.keyword = state.query.charAt(0).toUpperCase() + state.query.slice(1);
+          if (card.url === action.payload.url) {
+            card._id = action.payload._id;
           }
           return card;
         }),
@@ -57,16 +57,18 @@ export default (state, action) => {
         ...state,
         cards: state.cards.map((card) => {
           if (card.url === action.payload) {
-            card.isSaved = false;
+            card._id = null;
           }
           return card;
         }),
+        // eslint-disable-next-line arrow-parens
+        savedCards: state.savedCards.filter(card => card._id !== action.payload._id),
       };
     case SET_QUERY:
       localStorage.setItem('searchTerm', action.payload);
       return {
         ...state,
-        query: action.payload,
+        query: action.payload.charAt(0).toUpperCase() + action.payload.slice(1),
       };
     case SAVED_CARDS:
       return {
@@ -77,7 +79,6 @@ export default (state, action) => {
             newCard._id = card._id;
             newCard.url = card.url;
             newCard.title = card.title;
-            newCard.isSaved = true;
             newCard.description = card.text;
             newCard.publishedAt = card.date;
             newCard.source = card.source;
@@ -89,7 +90,6 @@ export default (state, action) => {
         }),
       };
     case CLEAR_NEWS:
-      // localStorage.removeItem('searchTerm');
       return {
         ...state,
         cards: [],

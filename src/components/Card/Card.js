@@ -7,13 +7,13 @@ import './Card.css';
 
 const Card = ({ card }) => {
   const {
+    _id,
     url,
     urlToImage,
     publishedAt,
     title,
     description,
     source,
-    isSaved,
     keyword,
   } = card;
 
@@ -44,7 +44,7 @@ const Card = ({ card }) => {
   const cardButtonType = `${
     page === 'saved-news'
       ? 'card__icon_trash'
-      : isSaved
+      : _id
         ? 'card__icon_save_true'
         : 'card__icon_save'
   }`;

@@ -1,6 +1,4 @@
 /* eslint-disable no-shadow */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable array-callback-return */
 /* eslint-disable no-param-reassign */
 import React, { useContext } from 'react';
 import NewsContext from '../../context/news/newsContext';

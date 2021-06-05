@@ -26,21 +26,7 @@ export default (state, action) => {
         token: action.payload.token,
       };
     case AUTH_ERROR:
-      return {
-        ...state,
-        token: null,
-        user: {},
-        isAuth: false,
-        errorMsg: action.payload,
-      };
     case LOGIN_FAIL:
-      return {
-        ...state,
-        token: null,
-        user: {},
-        isAuth: false,
-        errorMsg: action.payload,
-      };
     case REGISTER_FAIL:
       return {
         ...state,

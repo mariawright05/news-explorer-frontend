@@ -56,42 +56,47 @@ const AuthState = (props) => {
   };
 
   // Load user
-  const handleLoadUser = () => {
+  const handleLoadUser = async () => {
     const jwt = localStorage.getItem('jwt');
-    loadUser(jwt)
-      .then((res) => {
-        const token = localStorage.getItem('jwt');
-        dispatch({
-          type: USER_LOADED,
-          payload: { res, token },
-        });
-        state.token = jwt;
-      })
-      .catch(err => {
-        dispatch({
-          type: AUTH_ERROR,
-          payload: err,
-        });
+    try {
+      const res = await loadUser(jwt);
+      const token = localStorage.getItem('jwt');
+      dispatch({
+        type: USER_LOADED,
+        payload: { res, token },
       });
+      state.token = jwt;
+    } catch (err) {
+      dispatch({
+        type: AUTH_ERROR,
+        payload: err,
+      });
+    }
   };
 
   // Login
-  const handleLogin = (formData) => {
-    login(formData)
-      .then((res) => {
-        res?.token
-          ? dispatch({ type: LOGIN_SUCCESS, payload: res })
-          : dispatch({ type: LOGIN_FAIL, payload: res });
-        closeAllPopups();
-      })
-      .then(() => handleLoadUser())
-      .catch((err) => {
-        dispatch({ type: LOGIN_FAIL, payload: err.toString() });
-      });
+  const handleLogin = async (formData) => {
+    try {
+      const res = await login(formData);
+      res?.token
+        ? dispatch({ type: LOGIN_SUCCESS, payload: res })
+        : dispatch({ type: LOGIN_FAIL, payload: res });
+      closeAllPopups();
+      await handleLoadUser();
+    } catch (err) {
+      dispatch({ type: LOGIN_FAIL, payload: err.toString() });
+    }
   };
 
   // Register
-  const handleRegister = (formData) => {
+  const handleRegister = async (formData) => {
+    try {
+      await register(formData);
+      closeAllPopups();
+      handleSuccessOpen();
+    } catch (err) {
+      dispatch({ type: REGISTER_FAIL, payload: err.toString() });
+    }
     register(formData)
       .then(() => {
         closeAllPopups();

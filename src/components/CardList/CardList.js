@@ -14,20 +14,12 @@ const CardList = () => {
     cards,
     searchError,
     notFound,
-    // handleSavedCards,
     searchedList,
     savedList,
     savedCards,
   } = newsContext;
 
-  // const token = localStorage.getItem('jwt');
-  // useEffect(() => {
-  //   if (token) {
-  //     handleSavedCards(token);
-  //   }
-  // }, []);
-
-  // Preloader || Not Found || Search Error block
+  // Preloader | Not Found | Search Error block
   if (loading) {
     return <Preloader />;
   }

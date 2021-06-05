@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import AuthContext from '../context/auth/authContext';
 
@@ -8,13 +8,18 @@ const ProtectedRoute = ({ component: Component }) => {
 
   const token = localStorage.getItem('jwt');
 
+  useEffect(() => {
+    if (!token) {
+      handleLoginOpen();
+    }
+  }, []);
+
   return (
     <Route>
       {() => {
         if (token) {
           return <Component />;
         }
-        handleLoginOpen();
         return <Redirect to="/" />;
       }}
     </Route>

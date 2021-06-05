@@ -1,27 +1,25 @@
 /* eslint-disable quote-props */
 /* eslint-disable arrow-parens */
 /* eslint-disable arrow-body-style */
-import { DEV_AUTH_URL } from '../../utils/configData.json';
+import { AUTH_URL } from '../../utils/configData.json';
 
-export const loadUser = (token) => {
-  return fetch(`${DEV_AUTH_URL}/users/me`, {
+export const loadUser = async (token) => {
+  const res = await fetch(`${AUTH_URL}/users/me`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'x-auth-token': `${token}`,
     },
-  })
-    .then((res) => {
-      return res.ok
-        ? res.json()
-        : res.json().then(err => PromiseRejectionEvent.reject(err));
-    })
-    .then(data => data);
+  });
+  const data = await (res.ok
+    ? res.json()
+    : res.json().then(err => PromiseRejectionEvent.reject(err)));
+  return data;
 };
 
-export const login = ({ email, password }) => {
-  return fetch(`${DEV_AUTH_URL}/signin`, {
+export const login = async ({ email, password }) => {
+  const res = await fetch(`${AUTH_URL}/signin`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -31,17 +29,15 @@ export const login = ({ email, password }) => {
       email,
       password,
     }),
-  })
-    .then((res) => {
-      return res.ok
-        ? res.json()
-        : res.json().then((err) => { throw new Error(err); });
-    })
-    .then(data => data);
+  });
+  const data = await (res.ok
+    ? res.json()
+    : res.json().then((err) => { throw new Error(err); }));
+  return data;
 };
 
-export const register = ({ name, email, password }) => {
-  return fetch(`${DEV_AUTH_URL}/signup`, {
+export const register = async ({ name, email, password }) => {
+  const res = await fetch(`${AUTH_URL}/signup`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -52,11 +48,9 @@ export const register = ({ name, email, password }) => {
       email,
       password,
     }),
-  })
-    .then((res) => {
-      return res.ok
-        ? res.json()
-        : res.json().then((err) => { throw new Error(err); });
-    })
-    .then(data => data);
+  });
+  const data = await (res.ok
+    ? res.json()
+    : res.json().then((err) => { throw new Error(err); }));
+  return data;
 };
