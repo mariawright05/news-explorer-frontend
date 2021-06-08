@@ -60,8 +60,9 @@ const Card = ({ card }) => {
   const handleSaveClick = () => {
     if (isAuth) {
       handleUpdateSave(card, token);
+    } else {
+      handleRegisterOpen();
     }
-    handleRegisterOpen();
   };
 
   const handleSaveHover = () => {
