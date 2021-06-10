@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router, Route, Switch, Redirect,
+} from 'react-router-dom';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import Footer from '../Footer/Footer';
@@ -24,6 +26,7 @@ function App() {
                   path="/saved-news"
                   component={SavedNews}
                 />
+                <Redirect to="/" />
               </Switch>
               <Footer />
             </>
