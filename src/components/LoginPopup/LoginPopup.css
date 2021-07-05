@@ -49,13 +49,22 @@
 }
 
 .loginPopup__form-group {
-  padding: 22px 0 10px;
+  padding: 0 0 34px;
   margin: 0;
   border: none;
 }
 
-.loginPopup__form-label {
+.loginPopup__field-group {
   position: relative;
+  color: #2f71e5;
+  font-family: 'Inter', Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 14px;
+  margin-top: 30px;
+  position: relative;
+}
+
+.loginPopup__form-label {
   color: #2f71e5;
   font-family: 'Inter', Helvetica, sans-serif;
   font-size: 12px;
@@ -70,13 +79,37 @@
   width: 100%;
   padding: 10px 0;
   background-color: transparent;
-  margin-bottom: 30px;
 }
 
 .loginPopup__form-field:focus {
   outline: 0;
-  border-bottom: 1px solid #000;
-  margin-bottom: 31px;
+  border-bottom: 2px solid #000;
+}
+
+.loginPopup__error {
+  border-bottom: 2px solid red;
+}
+
+.loginPopup__error_visible {
+  border-bottom: none;
+  color: red;
+  font-size: 12px;
+  line-height: 15px;
+  position: absolute;
+  top: 45px;
+  left: 0;
+  z-index: 10;
+}
+
+.loginPopup__errorMsg_visible {
+  border-bottom: none;
+  color: red;
+  font-size: 12px;
+  line-height: 15px;
+  position: absolute;
+  bottom: 130px;
+  left: 160px;
+  z-index: 10;
 }
 
 .loginPopup__button {

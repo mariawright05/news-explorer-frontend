@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# News Explorer App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![NewsExplorer Screenshot](/src/images/app-graphic.jpg)
 
-## Available Scripts
+This project is a service where users can search for news articles and save them to their profiles.
 
-In the project directory, you can run:
+The app can be run at <http://localhost:3000/> and will access the api at <https://api-news-explorer-mmw.herokuapp.com/api>
 
-### `npm start`
+## About the Project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This website has these main features:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+* When a user enters a keyword in the search bar, a request to the News API service, where it finds all the relevant articles over the last week, and display a list of cards for each of them.
 
-### `npm test`
+* If a user creates an account, they have the ability to save and display articles they have saved in a special section of the website.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Front-End
 
-### `npm run build`
+The website consists of 2 pages: the home pages where users can seach for recent news articles, and a saved news page that is only available to logged in users. There are 3 popup windows: registration, registration success, and login.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Technology Features
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The front-end was written using React. Something new that I tried in this project was the use of `useContext` and `useReducer` hooks to create a global states for both user authorization as well as the contents of the news cards. Instead of putting all of the functions in App.js and passing them as props to all of the components, the functions are divided between "user" and "news" categories, and are put in their own respective files: `NewsState.js` and `AuthState.js`. All of the components are wrapped in these contexts and the state of the variables are available throughout the app.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Challenges
 
-### `npm run eject`
+The use of "cards" to display news articles created some challenges since they are slightly different on the `home` page and `saved-news` page. They needed to react to the user clicks to save, unsave, and delete, and all of these functionalities differed depending on what page they were located and whether or not the user was logged in. I originally showed the state of articles on the front-end first, then added or deleted the articles from the database. However, since unique ids were not created until a card was saved, I ran into problems. I solved this by reversing my strategy, and doing all the state changes on the backend, then determining how the cards would appear to the user.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+I also really upped my game with debugging in the course of this project. :octocat:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Back-End
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Two entities were created in this project: `user` and `article`.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The following 4 routes are included for `article`:
 
-## Learn More
+```bash
+# returns information about the logged-in user (email and name)
+GET /users/me
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# returns all articles saved by the user
+GET /articles
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# creates an article with the passed
+# keyword, title, text, date, source, link, and image in the body
+POST /articles
 
-### Code Splitting
+# deletes the stored article by _id
+DELETE /articles/articleId
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The following 2 routes are created for `user`:
 
-### Analyzing the Bundle Size
+```bash
+# creates a user with the passed
+# email, password, and name in the body
+POST /signup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# checks the email and password passed in the body
+# and returns a JWT
+POST /signin
+```
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The code for the backend can be found here: <https://github.com/mariawright05/news-explorer-api>
