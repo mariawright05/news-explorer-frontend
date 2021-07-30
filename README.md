@@ -4,7 +4,7 @@
 
 This project is a service where users can search for news articles and save them to their profiles.
 
-The app can be run at <http://localhost:3000/> and will access the api at <https://api-news-explorer-mmw.herokuapp.com/api>
+The app can be run at <https://mariawright05.github.io/news-explorer-frontend/> and will access the api at <https://api-news-explorer-mmw.herokuapp.com/api>
 
 ## About the Project
 
