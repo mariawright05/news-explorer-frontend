@@ -1,13 +1,9 @@
-/* eslint-disable no-unused-vars */
-import React, { useContext, useState, useEffect } from 'react';
-import { slice, concat } from 'lodash';
+import React, { useContext } from 'react';
 import './CardList.css';
-import Card from '../Card/Card';
 import Preloader from '../Preloader/Preloader';
 import NothingFound from '../NothingFound/NothingFound';
 import NewsContext from '../../context/news/newsContext';
 import PageContext from '../../context/page/PageContext';
-import { ARRAY_LENGTH, LIMIT } from '../../utils/configData.json';
 
 const CardList = () => {
   const newsContext = useContext(NewsContext);
@@ -16,68 +12,24 @@ const CardList = () => {
   const {
     loading,
     cards,
-    visibleList,
+    searchError,
+    notFound,
+    searchedList,
+    savedList,
+    savedCards,
   } = newsContext;
 
-  const [showMore, setShowMore] = useState(true);
-  const [list, setList] = useState([]);
-  const [index, setIndex] = useState(LIMIT);
-
-  const showInitialList = () => {
-    setList(visibleList);
-  };
-
-  useEffect(() => {
-    showInitialList();
-  }, [visibleList]);
-
-  const loadMore = () => {
-    const newIndex = index + LIMIT;
-    const newShowMore = newIndex < (ARRAY_LENGTH - 1);
-    const newList = concat(list, slice(cards, index, newIndex));
-    setIndex(newIndex);
-    setList(newList);
-    setShowMore(newShowMore);
-  };
-
-  const savedCards = cards.filter((e) => { return e.isSaved === true; });
-
-  function getRandom() {
-    return Math.random();
+  // Preloader | Not Found | Search Error block
+  if (loading) {
+    return <Preloader />;
   }
 
-  if (loading) {
-    const num = getRandom();
-    if (num < 0.5) {
-      return <Preloader />;
-    }
+  if (notFound || searchError) {
     return <NothingFound />;
   }
 
-  const searchedList = (
-    <>
-      {cards.length !== 0 && <h2 className="cardList__title">Search results</h2>}
-      <ul className="cardList__card-wrapper">
-        {list.map((card) => {
-          return <Card key={card.id} card={card} />;
-        })}
-      </ul>
-      {showMore && <button type="submit" className="cardList__button" onClick={loadMore}>Show more</button>}
-    </>
-  );
-
-  const savedList = (
-    <>
-      <ul className="cardList__card-wrapper">
-        {savedCards.map((card) => {
-          return <Card key={card.id} card={card} />;
-        })}
-      </ul>
-    </>
-  );
-
   return (
-    <div className={cards.length === 0 ? 'cardList_hidden' : 'cardList'}>
+    <div className={(cards.length !== 0 && page === 'home') || (savedCards.length !== 0 && page === 'saved-news') ? 'cardList' : 'cardList_hidden'}>
       <div className="cardList__section-wrapper">
         {page === 'home' ? searchedList : savedList}
       </div>

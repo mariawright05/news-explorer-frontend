@@ -2,7 +2,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-// import Sidebar from '../Sidebar/Sidebar';
 import LoginPopup from '../LoginPopup/LoginPopup';
 import RegisterPopup from '../RegisterPopup/RegisterPopup';
 import SuccessPopup from '../SuccessPopup/SuccessPopup';
@@ -11,9 +10,6 @@ import AuthContext from '../../context/auth/authContext';
 import './Header.css';
 import { ReactComponent as LogoutIcon } from '../../images/logout-white.svg';
 import { ReactComponent as LogoutIconAlt } from '../../images/logout-dark.svg';
-// import { ReactComponent as CloseSidebarIcon } from '../../images/close-menu-black.svg';
-// import { ReactComponent as OpenSidebarIcon } from '../../images/open-menu-white.svg';
-// import { ReactComponent as OpenSidebarIconAlt } from '../../images/open-menu-black.svg';
 
 const Header = () => {
   const page = useContext(PageContext);
@@ -25,7 +21,8 @@ const Header = () => {
     isRegisterOpen,
     isSuccessOpen,
     isAuth,
-    logout,
+    handleLogout,
+    handleLoadUser,
   } = authContext;
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -65,7 +62,7 @@ const Header = () => {
       <button
         type="button"
         className={`header__nav-button ${linkColor()}`}
-        onClick={logout}
+        onClick={handleLogout}
       >
         {user.name}
         {
@@ -111,7 +108,14 @@ const Header = () => {
 
   useEffect(() => {
     handleNavLinks();
-  }, [isAuth, isRegisterOpen, isLoginOpen, isSidebarOpen]);
+  }, [isAuth, isRegisterOpen, isLoginOpen, isSuccessOpen, isSidebarOpen]);
+
+  const token = localStorage.getItem('jwt');
+  useEffect(() => {
+    if (token) {
+      handleLoadUser();
+    }
+  }, []);
 
   return (
     <div className="header">

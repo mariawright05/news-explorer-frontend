@@ -14,8 +14,8 @@ const Author = () => {
       </div>
       <div className="author__text-container">
         <h2 className="author__title">About the author</h2>
-        <p className="author__body">This block describes the project author. Here you should indicate your name, what you do, and which development technologies you know.</p>
-        <p className="author__body">You can also talk about your experience with Practicum, what you learned there, and how you can help potential customers.</p>
+        <p className="author__body">I have been creating websites for clients for many years, but found myself loving the technical parts of web development more than the design.</p>
+        <p className="author__body">After completing Practicum&apos;s Web Developer program, I am excited about bringing my new skills to clients.</p>
       </div>
     </div>
   );

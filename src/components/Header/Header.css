@@ -56,10 +56,12 @@
 
 .header__nav-link_active {
   border-bottom: 3px solid #fff;
+  padding-top: 3px;
 }
 
 .header__nav-link_alt_active {
   border-bottom: 3px solid #1a1b22;
+  padding-top: 3px;
 }
 
 .header__nav-button {
@@ -77,6 +79,7 @@
   justify-content: center;
   cursor: pointer;
   margin-left: 16px;
+  text-transform: capitalize;
 }
 
 .header__nav-button:focus {

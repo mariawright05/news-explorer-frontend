@@ -1,22 +1,41 @@
-import React, { useState, useContext } from 'react';
+/* eslint-disable no-use-before-define */
+import React, { useContext, useEffect } from 'react';
 import Header from '../Header/Header';
 import NewsContext from '../../context/news/newsContext';
+import AuthContext from '../../context/auth/authContext';
+import useForm from '../../utils/useForm';
+import validate from './validateSearch';
+
 import './Search.css';
 
 const Search = () => {
   const newsContext = useContext(NewsContext);
-  const { searchNews } = newsContext;
+  const { handleSearchNews, setQuery } = newsContext;
 
-  const [text, setText] = useState('');
+  const authContext = useContext(AuthContext);
+  const { isAuth } = authContext;
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    searchNews(text);
+  const searchCallback = () => {
+    handleSearchNews(values.query);
+    setQuery(values.query);
   };
 
-  const onChange = (e) => {
-    setText(e.target.value);
-  };
+  const {
+    values,
+    onChange,
+    onSubmit,
+    errors,
+  } = useForm(searchCallback, validate);
+
+  const searchTerm = localStorage.getItem('searchTerm');
+
+  useEffect(() => {
+    if (searchTerm && isAuth) {
+      values.query = searchTerm;
+    } else {
+      values.query = '';
+    }
+  }, [isAuth]);
 
   return (
     <div className="search">
@@ -27,13 +46,13 @@ const Search = () => {
         <form className="search__input-wrapper" onSubmit={onSubmit}>
           <input
             type="text"
-            name="news"
+            name="query"
             className="search__input"
             placeholder="Enter topic"
-            value={text}
+            value={values.query || ''}
             onChange={onChange}
-            required
           />
+          {errors.query && <p className="search__error">{errors.query}</p> }
           <input
             type="submit"
             value="Search"
