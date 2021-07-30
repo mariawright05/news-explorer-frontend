@@ -1,6 +1,6 @@
 import React from 'react';
 import './Author.css';
-import Image from '../../images/maria-wright.jpg';
+import Image from '../../images/maria-wright.png';
 
 const Author = () => {
   return (
