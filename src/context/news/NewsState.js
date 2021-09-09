@@ -210,11 +210,11 @@ const NewsState = (props) => {
     }
   }, [isAuth]);
 
-  useEffect(() => {
-    return () => {
-      console.log('cleaned up');
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     console.log('cleaned up');
+  //   };
+  // }, []);
 
   return (
     <NewsContext.Provider
