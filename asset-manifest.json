@@ -1,29 +1,29 @@
 {
   "files": {
-    "main.css": "/news-explorer-frontend/static/css/main.f1db4c78.chunk.css",
-    "main.js": "/news-explorer-frontend/static/js/main.e4686394.chunk.js",
-    "main.js.map": "/news-explorer-frontend/static/js/main.e4686394.chunk.js.map",
-    "runtime-main.js": "/news-explorer-frontend/static/js/runtime-main.d31981ff.js",
-    "runtime-main.js.map": "/news-explorer-frontend/static/js/runtime-main.d31981ff.js.map",
-    "static/js/2.c4ba76e0.chunk.js": "/news-explorer-frontend/static/js/2.c4ba76e0.chunk.js",
-    "static/js/2.c4ba76e0.chunk.js.map": "/news-explorer-frontend/static/js/2.c4ba76e0.chunk.js.map",
-    "index.html": "/news-explorer-frontend/index.html",
-    "static/css/main.f1db4c78.chunk.css.map": "/news-explorer-frontend/static/css/main.f1db4c78.chunk.css.map",
-    "static/js/2.c4ba76e0.chunk.js.LICENSE.txt": "/news-explorer-frontend/static/js/2.c4ba76e0.chunk.js.LICENSE.txt",
-    "static/media/SuccessPopup.css": "/news-explorer-frontend/static/media/close-icon.3e1fa909.svg",
-    "static/media/Header.css": "/news-explorer-frontend/static/media/open-menu-white.e36517e5.svg",
-    "static/media/Search.css": "/news-explorer-frontend/static/media/hand-with-cellphone.7ff223ef.jpg",
-    "static/media/App.css": "/news-explorer-frontend/static/media/roboto-slab-700.934d56e4.woff2",
-    "static/media/logout-dark.c2dbc181.svg": "/news-explorer-frontend/static/media/logout-dark.c2dbc181.svg",
-    "static/media/logout-white.2e18a021.svg": "/news-explorer-frontend/static/media/logout-white.2e18a021.svg",
-    "static/media/maria-wright.ae02857e.png": "/news-explorer-frontend/static/media/maria-wright.ae02857e.png",
-    "static/media/NothingFound.css": "/news-explorer-frontend/static/media/not-found.5661906d.svg",
-    "static/media/Card.css": "/news-explorer-frontend/static/media/trash.f3c9809f.svg"
+    "main.css": "./static/css/main.db9b6f0f.chunk.css",
+    "main.js": "./static/js/main.6c9b0068.chunk.js",
+    "main.js.map": "./static/js/main.6c9b0068.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.729fb173.js",
+    "runtime-main.js.map": "./static/js/runtime-main.729fb173.js.map",
+    "static/js/2.c4ba76e0.chunk.js": "./static/js/2.c4ba76e0.chunk.js",
+    "static/js/2.c4ba76e0.chunk.js.map": "./static/js/2.c4ba76e0.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/main.db9b6f0f.chunk.css.map": "./static/css/main.db9b6f0f.chunk.css.map",
+    "static/js/2.c4ba76e0.chunk.js.LICENSE.txt": "./static/js/2.c4ba76e0.chunk.js.LICENSE.txt",
+    "static/media/SuccessPopup.css": "./static/media/close-icon.3e1fa909.svg",
+    "static/media/Header.css": "./static/media/open-menu-white.e36517e5.svg",
+    "static/media/Search.css": "./static/media/hand-with-cellphone.7ff223ef.jpg",
+    "static/media/App.css": "./static/media/roboto-slab-700.934d56e4.woff2",
+    "static/media/logout-dark.c2dbc181.svg": "./static/media/logout-dark.c2dbc181.svg",
+    "static/media/logout-white.2e18a021.svg": "./static/media/logout-white.2e18a021.svg",
+    "static/media/maria-wright.ae02857e.png": "./static/media/maria-wright.ae02857e.png",
+    "static/media/NothingFound.css": "./static/media/not-found.5661906d.svg",
+    "static/media/Card.css": "./static/media/trash.f3c9809f.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.d31981ff.js",
+    "static/js/runtime-main.729fb173.js",
     "static/js/2.c4ba76e0.chunk.js",
-    "static/css/main.f1db4c78.chunk.css",
-    "static/js/main.e4686394.chunk.js"
+    "static/css/main.db9b6f0f.chunk.css",
+    "static/js/main.6c9b0068.chunk.js"
   ]
 }
